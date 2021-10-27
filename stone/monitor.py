@@ -22,7 +22,7 @@ def StartProcess(processName):
     os.system('"C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"')
 
 #结束进程
-def KillProcesse(processName):
+def KillProcess(processName):
     os.system('%s%s' % ("C:\windows\system32\\taskkill /F /IM ",processName))
 
 def threadMonitor():
@@ -31,13 +31,13 @@ def threadMonitor():
         time.sleep(1)
         if bProcessExist(processStoneExe):
             if bProcessExist(processBattleExe):
-                KillProcesse(processBattleExe)
+                KillProcess(processBattleExe)
                 myRunStatus.setRunning(True)
                 myRunStatus.setRunTime()
         if myRunStatus._bRunning:
             cnt=int(time.time())-myRunStatus.getRunTime()
             if cnt>=180:
                 myRunStatus.setRunning(False)
-                KillProcesse(processStoneExe)
+                KillProcess(processStoneExe)
                 time.sleep(2)
                 StartProcess(processBattleExe)
