@@ -2,18 +2,15 @@
 #作者：琴弦上的宇宙
 #时间：2021年10月22日
 
-import cv2
-import pyautogui
-import win32gui,win32con
-import time
 import os
-import numpy as np
-import random
 from common import *
 
-class sceneInterBattle(myScene):
-    def __init__(self,name):
-        myScene.__init__(self,'InterBattle')
+class scStoneInsure(myScene):
+    def __init__(self):
+        self.name='StoneInsure'
+        self.path='resource/base/scStoneInsure'
+        self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
+        self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
     def proc(self,background):
         funcList={}
