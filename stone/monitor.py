@@ -4,40 +4,62 @@
 
 import os
 import time
-import win32com.client
+#import win32com.client
 from common import *
+from myGui import *
 
-processBattleExe='Battle.net.exe'
-processStoneExe='Hearthstone.exe'
+class Monitor():
 
-#检测进程
-def bProcessExist(processName):
-    WMI=win32com.client.GetObject('winmgmts:')
-    processCodeCov=WMI.ExecQuery('select * from Win32_Process where Name="%s"' % processName)
-    if len(processCodeCov)>0:return True
-    else:return False
+    processBattleExe='Battle.net.exe'
+    processStoneExe='Hearthstone.exe'
+    interval=180
+    bRunning=True
+    runTime=int(time.time())
 
-#启动进程
-def StartProcess(processName):
-    os.system('"C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"')
+    def __init__(self):
+        pass
 
-#结束进程
-def KillProcess(processName):
-    os.system('%s%s' % ("C:\windows\system32\\taskkill /F /IM ",processName))
+    def bRunning(self):
+        return self.bRunning
+
+    def setRunning(self,result):
+        self.bRunning=result
+
+    def getRunTime(self):
+        return self.runTime
+
+    def setRunTime(self):
+        self.runTime=int(time.time())
+
+    def bProcessExist(self,processName):
+        if 0:
+            WMI=win32com.client.GetObject('winmgmts:')
+            processCodeCov=WMI.ExecQuery('select * from Win32_Process where Name="%s"' % processName)
+            if len(processCodeCov)>0:return True
+            else:return False
+    
+    def startProcess(self,processName):
+        os.system('"C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"')
+
+    def killProcess(self,processName):
+        os.system('%s%s' % ("C:\windows\system32\\taskkill /F /IM ",processName))
+
+    def run(self):
+        while True:
+            time.sleep(1)
+            if self.bProcessExist(self.processStoneExe):
+                if self.bProcessExist(self.processBattleExe):
+                    self.killProcess(self.processBattleExe)
+                    self.setRunning(True)
+                    self.setRunTime()
+            if self.bRunning:
+                cnt=int(time.time())-self.getRunTime()
+                if cnt>=self.interval:
+                    self.setRunning(False)
+                    self.killProcess(self.processStoneExe)
+                    time.sleep(2)
+                    self.startProcess(self.processBattleExe)
 
 def threadMonitor():
-    myRunStatus=runStatus()
-    while True:
-        time.sleep(1)
-        if bProcessExist(processStoneExe):
-            if bProcessExist(processBattleExe):
-                KillProcess(processBattleExe)
-                myRunStatus.setRunning(True)
-                myRunStatus.setRunTime()
-        if myRunStatus._bRunning:
-            cnt=int(time.time())-myRunStatus.getRunTime()
-            if cnt>=180:
-                myRunStatus.setRunning(False)
-                KillProcess(processStoneExe)
-                time.sleep(2)
-                StartProcess(processBattleExe)
+    monitor=Monitor()
+    monitor.run()

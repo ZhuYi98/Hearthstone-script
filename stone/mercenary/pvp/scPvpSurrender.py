@@ -23,4 +23,4 @@ class scPvpSurrender(myScene):
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcSet' in funcList and 'funcDis' not in funcList:
             pos=funcList['funcSet']
-             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2) 
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2) 

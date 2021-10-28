@@ -2,7 +2,6 @@
 #作者：琴弦上的宇宙
 #时间：2021年10月22日
 
-import cv2
 import pyautogui
 import time
 
@@ -24,22 +23,22 @@ def threadAutoAi():
 class autoAi(object):
     def __init__(self):
         self.mode=None
-        self.scene=[]
+        self.allScene=[]
 
         #基础
-        self.scene.append(scStoneStart())
-        self.scene.append(scStoneInsure())
-        self.scene.append(scModeChoose())
+        self.allScene.append(scStoneStart())
+        self.allScene.append(scStoneInsure())
+        self.allScene.append(scModeChoose())
 
         #佣兵PVE
 
         #佣兵PVP
-        self.scene.append(scPvpSelectCard())
-        self.scene.append(scPvpSurrender())
+        self.allScene.append(scPvpSelectCard())
+        self.allScene.append(scPvpSurrender())
 
     def setMode(self,mode):
         if mode=='modePvpSurrender':
-            for scene in self.scene:
+            for scene in self.allScene:
                 if   scene.name=='StoneStart':scene.enable()
                 elif scene.name=='StoneInsure':scene.enable()
                 elif scene.name=='ModeChoose':scene.enable()
@@ -49,7 +48,7 @@ class autoAi(object):
     def procScene(self):
         pyautogui.screenshot('resource/background.png')
         background=cv2.imread("resource/background.png",0)
-        for scene in self.scene:
+        for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)
 
@@ -58,4 +57,3 @@ class autoAi(object):
         while True:
             time.sleep(0.1)
             self.procScene()
-
