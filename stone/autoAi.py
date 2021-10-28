@@ -47,8 +47,8 @@ class autoAi(object):
                 elif scene.name=='PvpSurrender':scene.enable()
 
     def procScene(self):
-        pyautogui.screenshot('resource/big.png')
-        background=cv2.imread("resource/big.png",0)
+        pyautogui.screenshot('resource/background.png')
+        background=cv2.imread("resource/background.png",0)
         for scene in self.scene:
             if scene.isOwn(background):
                 scene.proc(background)

@@ -39,7 +39,7 @@ def bFindInBackground(background,png):
         if 0:
             left_top=maxLoc
             right_bottom=(left_top[0]+w,left_top[1]+h)
-            img=cv2.imread("resource/big.png",1)
+            img=cv2.imread("resource/background.png",1)
             cv2.rectangle(img,left_top,right_bottom,(0,0,255),2)
             img=cv2.resize(img,(0,0),fx=0.5,fy=0.5,interpolation=cv2.INTER_NEAREST)
             print('maxVal='),
