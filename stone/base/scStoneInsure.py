@@ -7,6 +7,7 @@ from common import *
 
 class scStoneInsure(myScene):
     def __init__(self):
+        self.bValid=False
         self.name='StoneInsure'
         self.path='resource/base/scStoneInsure'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
@@ -19,4 +20,4 @@ class scStoneInsure(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStart' in funcList:
             pos=funcList['funcStart']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)

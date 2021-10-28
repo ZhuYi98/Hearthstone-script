@@ -8,7 +8,7 @@ from autoAi import *
 from monitor import *
 
 #隐藏控制台
-if not MyGui.gDebug:
+if not myScene.gDebug:
     import ctypes
     hWnd=ctypes.windll.kernel32.GetConsoleWindow()
     if hWnd!=0:

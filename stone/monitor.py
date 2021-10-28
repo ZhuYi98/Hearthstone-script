@@ -4,7 +4,7 @@
 
 import os
 import time
-#import win32com.client
+import win32com.client
 from common import *
 from myGui import *
 
@@ -12,7 +12,7 @@ class Monitor():
 
     processBattleExe='Battle.net.exe'
     processStoneExe='Hearthstone.exe'
-    interval=180
+    interval=18000
     bRunning=True
     runTime=int(time.time())
 
@@ -32,11 +32,10 @@ class Monitor():
         self.runTime=int(time.time())
 
     def bProcessExist(self,processName):
-        if 0:
-            WMI=win32com.client.GetObject('winmgmts:')
-            processCodeCov=WMI.ExecQuery('select * from Win32_Process where Name="%s"' % processName)
-            if len(processCodeCov)>0:return True
-            else:return False
+        WMI=win32com.client.GetObject('winmgmts:')
+        processCodeCov=WMI.ExecQuery('select * from Win32_Process where Name="%s"' % processName)
+        if len(processCodeCov)>0:return True
+        else:return False
     
     def startProcess(self,processName):
         os.system('"C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"')

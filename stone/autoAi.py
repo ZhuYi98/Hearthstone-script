@@ -2,18 +2,32 @@
 #作者：琴弦上的宇宙
 #时间：2021年10月22日
 
+import cv2
 import pyautogui
 import time
+from common import *
 
 #基础
 from base.scStoneStart import *
 from base.scStoneInsure import *
 from base.scModeChoose import *
 
+#佣兵
+from mercenary.base.scPointChoose import *
+from mercenary.base.scSelectCard import *
+from mercenary.base.scFightEnd import *
+from mercenary.base.scFightBox import *
+
 #佣兵PVE
+from mercenary.pve.scPveSelectZone import *
+from mercenary.pve.scPveSelectLevel import *
+from mercenary.pve.scPveFightChoose import *
+from mercenary.pve.scPveFightIng import *
+from mercenary.pve.scPveSelectTreasury import *
+from mercenary.pve.scPveSelectSurprise import *
+from mercenary.pve.scPveFightQuit import *
 
 #佣兵PVP
-from mercenary.pvp.scPvpSelectCard import *
 from mercenary.pvp.scPvpSurrender import *
 
 def threadAutoAi():
@@ -30,10 +44,22 @@ class autoAi(object):
         self.allScene.append(scStoneInsure())
         self.allScene.append(scModeChoose())
 
+        #佣兵
+        self.allScene.append(scPointChoose())
+        self.allScene.append(scSelectCard())
+        self.allScene.append(scFightEnd())
+        self.allScene.append(scFightBox())
+
         #佣兵PVE
+        self.allScene.append(scPveSelectZone())
+        self.allScene.append(scPveSelectLevel())
+        self.allScene.append(scPveFightChoose())
+        self.allScene.append(scPveFightIng())
+        self.allScene.append(scPveSelectTreasury())
+        self.allScene.append(scPveSelectSurprise())
+        self.allScene.append(scPveFightQuit())
 
         #佣兵PVP
-        self.allScene.append(scPvpSelectCard())
         self.allScene.append(scPvpSurrender())
 
     def setMode(self,mode):
@@ -42,8 +68,27 @@ class autoAi(object):
                 if   scene.name=='StoneStart':scene.enable()
                 elif scene.name=='StoneInsure':scene.enable()
                 elif scene.name=='ModeChoose':scene.enable()
-                elif scene.name=='PvpSelectCard':scene.enable()
+                elif scene.name=='PointChoose':scene.enable()
+                elif scene.name=='SelectCard':scene.enable()
                 elif scene.name=='PvpSurrender':scene.enable()
+                elif scene.name=='FightEnd':scene.enable()
+                elif scene.name=='FightBox':scene.enable()
+        elif mode=='modePve':
+            for scene in self.allScene:
+                if   scene.name=='StoneStart':scene.enable()
+                elif scene.name=='StoneInsure':scene.enable()
+                elif scene.name=='ModeChoose':scene.enable()
+                elif scene.name=='PointChoose':scene.enable()
+                elif scene.name=='SelectCard':scene.enable()
+                elif scene.name=='FightEnd':scene.enable()
+                elif scene.name=='FightBox':scene.enable()
+                elif scene.name=='PveSelectZone':scene.enable()
+                elif scene.name=='PveSelectLevel':scene.enable()
+                elif scene.name=='PveFightChoose':scene.enable()
+                elif scene.name=='PveFightIng':scene.enable()
+                elif scene.name=='PveFightQuit':scene.enable()
+                elif scene.name=='PveSelectTreasury':scene.enable()
+                elif scene.name=='PveSelectSurprise':scene.enable()
 
     def procScene(self):
         pyautogui.screenshot('resource/background.png')
@@ -51,9 +96,11 @@ class autoAi(object):
         for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)
+                break
 
     def run(self):
-        self.setMode('modePvpSurrender')
+        #self.setMode('modePvpSurrender')
+        self.setMode('modePve')
         while True:
             time.sleep(0.1)
             self.procScene()

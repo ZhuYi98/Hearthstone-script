@@ -7,6 +7,7 @@ from common import *
 
 class scStoneStart(myScene):
     def __init__(self):
+        self.bValid=False
         self.name='StoneStart'
         self.path='resource/base/scStoneStart'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
@@ -19,4 +20,4 @@ class scStoneStart(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStart' in funcList:
             pos=funcList['funcStart']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)

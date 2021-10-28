@@ -4,9 +4,8 @@
 
 from tkinter import *
 from tkinter import ttk,filedialog
-from threading import Thread
 import time
-#from common import *
+from common import *
 from monitor import *
 
 #时钟
@@ -36,14 +35,12 @@ class Watch(Frame):
 
 class MyGui():
 
-    gDebug=0
-
     def __init__(self):
         self.win=Tk()
         self.win.title('炉石AI--by琴弦上的宇宙') #标题
         self.win.attributes('-alpha',0.9) #透明度
         self.win.attributes('-topmost',True) #置顶
-        self.win.geometry("420x280+600+200") #大小和位置
+        self.win.geometry("420x280+20+20") #大小和位置
         self.win.resizable(width=False,height=False)
 
         self.lb1=Label(self.win,text='战网启动器：',font=("",12))

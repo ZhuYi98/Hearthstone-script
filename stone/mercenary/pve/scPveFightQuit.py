@@ -5,11 +5,11 @@
 import os
 from common import *
 
-class scPvpSurrender(myScene):
+class scPveFightQuit(myScene):
     def __init__(self):
         self.bValid=False
-        self.name='PvpSelectCard'
-        self.path='resource/mercenary/pvp/scPvpSurrender'
+        self.name='PveFightQuit'
+        self.path='resource/mercenary/pve/scPveFightQuit'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
@@ -18,9 +18,9 @@ class scPvpSurrender(myScene):
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func.png)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcSurrender' in funcList:
-            pos=funcList['funcSurrender']
+        if 'funcInsure' in funcList:
+            pos=funcList['funcInsure']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcSet' in funcList and 'funcDis' not in funcList:
-            pos=funcList['funcSet']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2) 
+        elif 'funcQuit' in funcList:
+            pos=funcList['funcQuit']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
