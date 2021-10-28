@@ -5,11 +5,24 @@
 import cv2
 import pyautogui
 import time
+import random
 
 def moveAndClick(x,y):
     if x>10 and x<=1910 and y>10 and y<=1070:
-        pyautogui.moveTo(x,y)
+        pyautogui.moveTo(x+randint(-5, 5),y+randint(-5, 5))
         pyautogui.click(clicks=1)
+        pyautogui.moveTo(650,20)
+        pyautogui.click(clicks=1)
+    else:
+        pyautogui.moveTo(650,20)
+        pyautogui.click(clicks=1)
+
+def drag(x0,y0,x1,y1):
+    if x0>10 and x0<=1910 and y0>10 and y0<=1070 and x1>10 and x1<=1910 and y1>10 and y1<=1070:
+        pyautogui.mouseDown(x0+randint(-5,5),y0+randint(-5,5))
+        pyautogui.moveTo(x1+randint(-5,5),y1+randint(-5,5))
+        time.sleep(0.5)
+        pyautogui.mouseUp(x1+randint(-5,5),y1+randint(-5,5))
         pyautogui.moveTo(650,20)
         pyautogui.click(clicks=1)
     else:
@@ -63,12 +76,20 @@ class myScene(object):
     gCurrScene=None
 
     def __init__(self):
+        self.bValid=False
         self.name=''
         self.path=''
         self.tagPng=[myPng('','')]
         self.funcPng=[myPng('','')]
+    
+    def enable(self):
+        self.bValid=True
+
+    def dis(self):
+        self.bValid=False
 
     def isOwn(self,background):
+        if not self.bValid:return False
         for tag in self.tagPng:
             bFind,x,y,w,h=bFindInBackground(background,tag.png)
             if not bFind:
