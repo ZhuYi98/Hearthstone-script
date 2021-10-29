@@ -4,6 +4,7 @@
 
 import os
 from common import *
+from openCv import *
 
 class scPveSelectLevel(myScene):
     def __init__(self):
@@ -16,11 +17,11 @@ class scPveSelectLevel(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func.png)
+            bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcLevel_2_6' in funcList and 'funcStart' in funcList:
             pos=funcList['funcStart']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcSel_2_6' in funcList:
             pos=funcList['funcSel_2_6']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

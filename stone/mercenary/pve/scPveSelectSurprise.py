@@ -4,6 +4,7 @@
 
 import os
 from common import *
+from openCv import *
 
 class scPveSelectSurprise(myScene):
     def __init__(self):
@@ -16,7 +17,7 @@ class scPveSelectSurprise(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func.png)
+            bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
         if ('funcHero1Sel' in funcList or \
             'funcHero2Sel' in funcList) \

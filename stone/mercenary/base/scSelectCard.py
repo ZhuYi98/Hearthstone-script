@@ -4,6 +4,7 @@
 
 import os
 from common import *
+from openCv import *
 
 class scSelectCard(myScene):
     def __init__(self):
@@ -17,17 +18,20 @@ class scSelectCard(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag.png)
+                bFind,x,y,w,h=bFindInBackground(background,tag)
                 if bFind:tagList[tag.name]=(x,y,w,h)
             if ('tag1' in tagList) or \
-               ('tag2' in tagList):return True
+               ('tag2' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func.png)
+            bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcLock' in funcList:
             pos=funcList['funcLock']
@@ -35,7 +39,7 @@ class scSelectCard(myScene):
         else:
             if 'funcCard1' in funcList and 'funcStart1' in funcList:
                 pos=funcList['funcStart1']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
             elif 'funcSel1' in funcList:
                 pos=funcList['funcSel1']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

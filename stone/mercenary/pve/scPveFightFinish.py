@@ -6,11 +6,11 @@ import os
 from common import *
 from openCv import *
 
-class scPointChoose(myScene):
+class scPveFightFinish(myScene):
     def __init__(self):
         self.bValid=False
-        self.name='PointChoose'
-        self.path='resource/mercenary/base/scPointChoose'
+        self.name='PveFightFinish'
+        self.path='resource/mercenary/pve/scPveFightFinish'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
@@ -19,9 +19,6 @@ class scPointChoose(myScene):
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcPve' in funcList:
-            pos=funcList['funcPve']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcPvp' in funcList:
-            pos=funcList['funcPvp']
+        if 'funcFinish' in funcList:
+            pos=funcList['funcFinish']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

@@ -4,6 +4,7 @@
 
 import os
 from common import *
+from openCv import *
 
 class scPvpSurrender(myScene):
     def __init__(self):
@@ -16,7 +17,7 @@ class scPvpSurrender(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func.png)
+            bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcSurrender' in funcList:
             pos=funcList['funcSurrender']

@@ -6,6 +6,7 @@ import cv2
 import pyautogui
 import time
 from common import *
+from openCv import *
 
 #基础
 from base.scStoneStart import *
@@ -17,6 +18,7 @@ from mercenary.base.scPointChoose import *
 from mercenary.base.scSelectCard import *
 from mercenary.base.scFightEnd import *
 from mercenary.base.scFightBox import *
+from mercenary.base.scSingleHand import *
 
 #佣兵PVE
 from mercenary.pve.scPveSelectZone import *
@@ -26,6 +28,7 @@ from mercenary.pve.scPveFightIng import *
 from mercenary.pve.scPveSelectTreasury import *
 from mercenary.pve.scPveSelectSurprise import *
 from mercenary.pve.scPveFightQuit import *
+from mercenary.pve.scPveFightFinish import *
 
 #佣兵PVP
 from mercenary.pvp.scPvpSurrender import *
@@ -49,6 +52,7 @@ class autoAi(object):
         self.allScene.append(scSelectCard())
         self.allScene.append(scFightEnd())
         self.allScene.append(scFightBox())
+        self.allScene.append(scSingleHand())
 
         #佣兵PVE
         self.allScene.append(scPveSelectZone())
@@ -58,6 +62,7 @@ class autoAi(object):
         self.allScene.append(scPveSelectTreasury())
         self.allScene.append(scPveSelectSurprise())
         self.allScene.append(scPveFightQuit())
+        self.allScene.append(scPveFightFinish())
 
         #佣兵PVP
         self.allScene.append(scPvpSurrender())
@@ -70,9 +75,10 @@ class autoAi(object):
                 elif scene.name=='ModeChoose':scene.enable()
                 elif scene.name=='PointChoose':scene.enable()
                 elif scene.name=='SelectCard':scene.enable()
-                elif scene.name=='PvpSurrender':scene.enable()
+                elif scene.name=='SingleHand':scene.enable()
                 elif scene.name=='FightEnd':scene.enable()
                 elif scene.name=='FightBox':scene.enable()
+                elif scene.name=='PvpSurrender':scene.enable()
         elif mode=='modePve':
             for scene in self.allScene:
                 if   scene.name=='StoneStart':scene.enable()
@@ -82,6 +88,7 @@ class autoAi(object):
                 elif scene.name=='SelectCard':scene.enable()
                 elif scene.name=='FightEnd':scene.enable()
                 elif scene.name=='FightBox':scene.enable()
+                elif scene.name=='SingleHand':scene.enable()
                 elif scene.name=='PveSelectZone':scene.enable()
                 elif scene.name=='PveSelectLevel':scene.enable()
                 elif scene.name=='PveFightChoose':scene.enable()
@@ -89,10 +96,11 @@ class autoAi(object):
                 elif scene.name=='PveFightQuit':scene.enable()
                 elif scene.name=='PveSelectTreasury':scene.enable()
                 elif scene.name=='PveSelectSurprise':scene.enable()
+                elif scene.name=='PveFightFinish':scene.enable()
 
     def procScene(self):
-        pyautogui.screenshot('resource/background.png')
-        background=cv2.imread("resource/background.png",0)
+        pyautogui.screenshot("resource/background.png")
+        background=cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
         for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)
@@ -102,5 +110,5 @@ class autoAi(object):
         #self.setMode('modePvpSurrender')
         self.setMode('modePve')
         while True:
-            time.sleep(0.1)
+            time.sleep(1)
             self.procScene()

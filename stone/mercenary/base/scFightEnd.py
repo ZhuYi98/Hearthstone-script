@@ -4,6 +4,7 @@
 
 import os
 from common import *
+from openCv import *
 
 class scFightEnd(myScene):
     def __init__(self):
@@ -16,7 +17,7 @@ class scFightEnd(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func.png)
+            bFind,x,y,w,h=bFindInBackground(background,func)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcVictory' in funcList:
             pos=funcList['funcVictory']
@@ -24,16 +25,6 @@ class scFightEnd(myScene):
         elif 'funcDefeat' in funcList:
             pos=funcList['funcDefeat']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcContinue1' in funcList:
-            pos=funcList['funcContinue1']
+        elif 'funcOther' in funcList:
+            pos=funcList['funcOther']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcContinue2' in funcList:
-            pos=funcList['funcContinue2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcContinue3' in funcList:
-            pos=funcList['funcContinue3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcContinue4' in funcList:
-            pos=funcList['funcContinue4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-
