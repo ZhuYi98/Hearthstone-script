@@ -18,12 +18,18 @@ class scSingleHand(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if bFind:tagList[tag.name]=(x,y,w,h)
             if ('tag1' in tagList) or \
                ('tag2' in tagList) or \
                ('tag3' in tagList) or \
-               ('tag4' in tagList):
+               ('tag4' in tagList) or \
+               ('tag5' in tagList) or \
+               ('tag6' in tagList) or \
+               ('tag7' in tagList) or \
+               ('tag8' in tagList) or \
+               ('tag9' in tagList) or \
+               ('tag10' in tagList):
                 return True
             else:
                 return False
@@ -33,7 +39,7 @@ class scSingleHand(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'func1' in funcList:
             pos=funcList['func1']
@@ -46,4 +52,22 @@ class scSingleHand(myScene):
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'func4' in funcList:
             pos=funcList['func4']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func5' in funcList:
+            pos=funcList['func5']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func6' in funcList:
+            pos=funcList['func6']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func7' in funcList:
+            pos=funcList['func7']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func8' in funcList:
+            pos=funcList['func8']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func9' in funcList:
+            pos=funcList['func9']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func10' in funcList:
+            pos=funcList['func10']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

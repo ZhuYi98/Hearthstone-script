@@ -12,7 +12,7 @@ class Monitor():
 
     processBattleExe='Battle.net.exe'
     processStoneExe='Hearthstone.exe'
-    interval=18000
+    interval=3600
     bRunning=True
     runTime=int(time.time())
 

@@ -12,7 +12,8 @@ from openCv import *
 def moveAndClick(x,y):
     if x>=10 and x<=1910 and y>=10 and y<=1070:
         pyautogui.moveTo(x,y)
-        pyautogui.click(clicks=2)
+        pyautogui.click(clicks=1)
+        time.sleep(1)
         pyautogui.moveTo(10,10)
         pyautogui.click(clicks=1)
 
@@ -49,13 +50,6 @@ class myScene(object):
     def dis(self):
         self.bValid=False
 
-    def isOwn(self,background):
-        if self.bValid:
-            for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag)
-                if not bFind:return False
-            return True
-        else:
-            return False
+    def isOwn(self,background):None
 
     def proc(self,background):None

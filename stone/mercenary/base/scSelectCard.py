@@ -18,7 +18,7 @@ class scSelectCard(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if bFind:tagList[tag.name]=(x,y,w,h)
             if ('tag1' in tagList) or \
                ('tag2' in tagList):
@@ -31,15 +31,19 @@ class scSelectCard(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcLock' in funcList:
             pos=funcList['funcLock']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         else:
-            if 'funcCard1' in funcList and 'funcStart1' in funcList:
-                pos=funcList['funcStart1']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            if 'funcCard1' in funcList:
+                if 'funcStart1' in funcList:
+                    pos=funcList['funcStart1']
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                elif 'funcStart2' in funcList:
+                    pos=funcList['funcStart2']
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
             elif 'funcSel1' in funcList:
                 pos=funcList['funcSel1']
                 moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

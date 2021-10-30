@@ -14,6 +14,20 @@ class scPveFightChoose(myScene):
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
+    def isOwn(self,background):
+        if self.bValid:
+            tagList={}
+            for tag in self.tagPng:
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
+                if bFind:tagList[tag.name]=(x,y,w,h)
+            if (('tag1' in tagList) or ('tag11' in tagList)) and \
+               ('tag2' in tagList):
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def bValidButton(self):
         pyautogui.screenshot('resource/background.png')
         background=cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
@@ -24,7 +38,7 @@ class scPveFightChoose(myScene):
                 (func.name=='funcStartShow') or \
                 (func.name=='funcStartGet') or \
                 (func.name=='funcStartSkip'):
-                bFind,x,y,w,h=bFindInBackground(background,func)
+                bFind,x,y,w,h=bFindInBackground(background,func,0.95)
                 if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStartInter' in funcList:
             pos=funcList['funcStartInter']
@@ -67,7 +81,7 @@ class scPveFightChoose(myScene):
                 (func.name=='funcStartShow') or \
                 (func.name=='funcStartGet') or \
                 (func.name=='funcStartSkip'):
-                bFind,x,y,w,h=bFindInBackground(background,func)
+                bFind,x,y,w,h=bFindInBackground(background,func,0.95)
                 if bFind:funcList2[func.name]=(x,y,w,h)
         if 'funcStartInter' in funcList2:
             pos=funcList2['funcStartInter']
@@ -95,7 +109,7 @@ class scPveFightChoose(myScene):
         for func in self.funcPng:
             if (func.name=='funcComfort') or \
                 (func.name=='funcAward'):
-                bFind,x,y,w,h=bFindInBackground(background,func)
+                bFind,x,y,w,h=bFindInBackground(background,func,0.95)
                 if bFind:funcList3[func.name]=(x,y,w,h)
         if 'funcComfort' in funcList3:
             pos=funcList3['funcComfort']
@@ -119,7 +133,7 @@ class scPveFightChoose(myScene):
                 (func.name=='funcHeroBlue') or \
                 (func.name=='funcHeroGreen') or \
                 (func.name=='funcHeroBoss'):
-                bFind,okList=bFindMultInBackground(background,func)
+                bFind,okList=bFindMultInBackground(background,func,0.80)
                 if bFind:funcList4[func.name]=okList
         if 'funcSurprise' in funcList4:
             posList=funcList4['funcSurprise']

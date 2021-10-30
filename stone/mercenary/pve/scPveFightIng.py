@@ -14,13 +14,28 @@ class scPveFightIng(myScene):
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
+    def isOwn(self,background):
+        if self.bValid:
+            for tag in self.tagPng:
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
+                if not bFind:return False
+            return True
+        else:
+            return False
+
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcHeroNone' in funcList:
-            pos=funcList['funcHeroNone']
+        if 'funcHeroNone1' in funcList:
+            pos=funcList['funcHeroNone1']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'funcHeroNone2' in funcList:
+            pos=funcList['funcHeroNone2']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'funcHeroNone3' in funcList:
+            pos=funcList['funcHeroNone3']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcSkill1' in funcList:
             pos=funcList['funcSkill1']
@@ -42,6 +57,9 @@ class scPveFightIng(myScene):
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcSkill7' in funcList:
             pos=funcList['funcSkill7']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'funcSkill8' in funcList:
+            pos=funcList['funcSkill8']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcSkillOk' in funcList:
             pos=funcList['funcSkillOk']

@@ -14,14 +14,32 @@ class scPveSelectLevel(myScene):
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
+    def isOwn(self,background):
+        if self.bValid:
+            for tag in self.tagPng:
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.88)
+                if not bFind:return False
+            return True
+        else:
+            return False
+
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcLevel_2_6' in funcList and 'funcStart' in funcList:
-            pos=funcList['funcStart']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcSel_2_6' in funcList:
-            pos=funcList['funcSel_2_6']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        level='2_6'
+        if level=='1_1':
+            if 'funcLevel_1_1' in funcList and 'funcStart' in funcList:
+                pos=funcList['funcStart']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            elif 'funcSel_1_1' in funcList:
+                pos=funcList['funcSel_1_1']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif level=='2_6':
+            if 'funcLevel_2_6' in funcList and 'funcStart' in funcList:
+                pos=funcList['funcStart']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            elif 'funcSel_2_6' in funcList:
+                pos=funcList['funcSel_2_6']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

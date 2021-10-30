@@ -16,7 +16,6 @@ from base.scModeChoose import *
 #佣兵
 from mercenary.base.scPointChoose import *
 from mercenary.base.scSelectCard import *
-from mercenary.base.scFightEnd import *
 from mercenary.base.scFightBox import *
 from mercenary.base.scSingleHand import *
 
@@ -50,7 +49,6 @@ class autoAi(object):
         #佣兵
         self.allScene.append(scPointChoose())
         self.allScene.append(scSelectCard())
-        self.allScene.append(scFightEnd())
         self.allScene.append(scFightBox())
         self.allScene.append(scSingleHand())
 
@@ -76,7 +74,6 @@ class autoAi(object):
                 elif scene.name=='PointChoose':scene.enable()
                 elif scene.name=='SelectCard':scene.enable()
                 elif scene.name=='SingleHand':scene.enable()
-                elif scene.name=='FightEnd':scene.enable()
                 elif scene.name=='FightBox':scene.enable()
                 elif scene.name=='PvpSurrender':scene.enable()
         elif mode=='modePve':
@@ -86,7 +83,6 @@ class autoAi(object):
                 elif scene.name=='ModeChoose':scene.enable()
                 elif scene.name=='PointChoose':scene.enable()
                 elif scene.name=='SelectCard':scene.enable()
-                elif scene.name=='FightEnd':scene.enable()
                 elif scene.name=='FightBox':scene.enable()
                 elif scene.name=='SingleHand':scene.enable()
                 elif scene.name=='PveSelectZone':scene.enable()
@@ -110,5 +106,5 @@ class autoAi(object):
         #self.setMode('modePvpSurrender')
         self.setMode('modePve')
         while True:
-            time.sleep(1)
+            time.sleep(1.5)
             self.procScene()

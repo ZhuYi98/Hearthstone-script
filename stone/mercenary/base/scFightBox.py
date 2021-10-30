@@ -18,14 +18,15 @@ class scFightBox(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
                 if bFind:tagList[tag.name]=(x,y,w,h)
             if ('tag1' in tagList) or \
                ('tag2' in tagList) or \
                ('tag3' in tagList) or \
                ('tag4' in tagList) or \
                ('tag5' in tagList) or \
-               ('tag6' in tagList):
+               ('tag6' in tagList) or \
+               ('tag7' in tagList):
                 return True
             else:
                 return False
@@ -35,10 +36,13 @@ class scFightBox(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcPass' in funcList:
-            pos=funcList['funcPass']
+        if 'funcPass1' in funcList:
+            pos=funcList['funcPass1']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        if 'funcPass2' in funcList:
+            pos=funcList['funcPass2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'funcBox1' in funcList:
             pos=funcList['funcBox1']

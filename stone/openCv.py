@@ -32,7 +32,7 @@ def myNms(dets,thresh):
         order=order[inds+1]
     return keep
 
-gDebug=1
+gDebug=0
 gShow=0
 
 def bFindInBackground(background,tempPng,threshold=0.80):
@@ -54,7 +54,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
         return True,x,y,w,h
     else:
         if gDebug:
-            print('Not single match, maxVal='+str(maxVal))
+            print(tempPng.path+' not single match, maxVal='+str(maxVal))
         return False,0,0,0,0
 
 def bFindMultInBackground(background,tempPng,threshold=0.80):
@@ -108,5 +108,5 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
         return True,okList
     else:
         if gDebug:
-            print('Not mult match, maxVal='+str(maxVal))
+            print(tempPng.path+' not mult match, maxVal='+str(maxVal))
         return False,okList

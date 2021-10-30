@@ -14,10 +14,19 @@ class scPveFightQuit(myScene):
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
 
+    def isOwn(self,background):
+        if self.bValid:
+            for tag in self.tagPng:
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
+                if not bFind:return False
+            return True
+        else:
+            return False
+
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.95)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcInsure' in funcList:
             pos=funcList['funcInsure']
