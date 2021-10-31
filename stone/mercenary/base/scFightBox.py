@@ -40,22 +40,22 @@ class scFightBox(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcPass1' in funcList:
             pos=funcList['funcPass1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
         if 'funcPass2' in funcList:
             pos=funcList['funcPass2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
         elif 'funcBox1' in funcList:
             pos=funcList['funcBox1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcBox2' in funcList:
             pos=funcList['funcBox2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcBox3' in funcList:
             pos=funcList['funcBox3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcBox4' in funcList:
             pos=funcList['funcBox4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcBox5' in funcList:
             pos=funcList['funcBox5']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)

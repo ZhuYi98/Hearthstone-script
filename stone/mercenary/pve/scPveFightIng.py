@@ -30,40 +30,40 @@ class scPveFightIng(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcHeroNone1' in funcList:
             pos=funcList['funcHeroNone1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcHeroNone2' in funcList:
             pos=funcList['funcHeroNone2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcHeroNone3' in funcList:
             pos=funcList['funcHeroNone3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill1' in funcList:
             pos=funcList['funcSkill1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill2' in funcList:
             pos=funcList['funcSkill2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill3' in funcList:
             pos=funcList['funcSkill3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill4' in funcList:
             pos=funcList['funcSkill4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill5' in funcList:
             pos=funcList['funcSkill5']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill6' in funcList:
             pos=funcList['funcSkill6']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill7' in funcList:
             pos=funcList['funcSkill7']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkill8' in funcList:
             pos=funcList['funcSkill8']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkillOk' in funcList:
             pos=funcList['funcSkillOk']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
         elif 'funcSkillError' in funcList:
             pos=funcList['funcSkillError']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)

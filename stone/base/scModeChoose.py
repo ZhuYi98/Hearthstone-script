@@ -30,4 +30,4 @@ class scModeChoose(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcMercenary' in funcList:
             pos=funcList['funcMercenary']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)

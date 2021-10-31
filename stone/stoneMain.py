@@ -8,7 +8,7 @@ from autoAi import *
 from monitor import *
 
 #隐藏控制台
-if 0:
+if 1:
     import ctypes
     hWnd=ctypes.windll.kernel32.GetConsoleWindow()
     if hWnd!=0:
@@ -18,6 +18,9 @@ if 0:
 #主函数
 if __name__=='__main__':
     def main():
+
+        #日志
+        #sys.stdout=MyLog()
 
         #菜单
         myGui=MyGui()

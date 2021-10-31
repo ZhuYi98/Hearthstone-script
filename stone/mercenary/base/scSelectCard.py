@@ -5,6 +5,7 @@
 import os
 from common import *
 from openCv import *
+from myGui import *
 
 class scSelectCard(myScene):
     def __init__(self):
@@ -35,15 +36,16 @@ class scSelectCard(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcLock' in funcList:
             pos=funcList['funcLock']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
         else:
             if 'funcCard1' in funcList:
                 if 'funcStart1' in funcList:
                     pos=funcList['funcStart1']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
                 elif 'funcStart2' in funcList:
                     pos=funcList['funcStart2']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
+                MyGui.gRound=0
             elif 'funcSel1' in funcList:
                 pos=funcList['funcSel1']
                 moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

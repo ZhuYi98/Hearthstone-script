@@ -5,6 +5,8 @@
 import os
 from common import *
 from openCv import *
+from myGui import *
+from monitor import *
 
 class scSingleHand(myScene):
     def __init__(self):
@@ -59,9 +61,11 @@ class scSingleHand(myScene):
         elif 'func6' in funcList:
             pos=funcList['func6']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func7' in funcList:
-            pos=funcList['func7']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'funcRound' in funcList:
+            pos=funcList['funcRound']
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+            MyGui.gRound+=1
+            MyGui.gRunTime=time.time()
         elif 'func8' in funcList:
             pos=funcList['func8']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

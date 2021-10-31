@@ -42,23 +42,23 @@ class scPveFightChoose(myScene):
                 if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStartInter' in funcList:
             pos=funcList['funcStartInter']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
             return True
         elif 'funcStartGoto' in funcList:
             pos=funcList['funcStartGoto']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,8)
             return True
         elif 'funcStartShow' in funcList:
             pos=funcList['funcStartShow']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return True
         elif 'funcStartGet' in funcList:
             pos=funcList['funcStartGet']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return True
         elif 'funcStartSkip' in funcList:
             pos=funcList['funcStartSkip']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return True
         else:
             return False
@@ -85,39 +85,23 @@ class scPveFightChoose(myScene):
                 if bFind:funcList2[func.name]=(x,y,w,h)
         if 'funcStartInter' in funcList2:
             pos=funcList2['funcStartInter']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
             return
         elif 'funcStartGoto' in funcList2:
             pos=funcList2['funcStartGoto']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,8)
             return
         elif 'funcStartShow' in funcList2:
             pos=funcList2['funcStartShow']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return
         elif 'funcStartGet' in funcList2:
             pos=funcList2['funcStartGet']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return
         elif 'funcStartSkip' in funcList2:
             pos=funcList2['funcStartSkip']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-
-        #寻找特殊按钮
-        funcList3={}
-        for func in self.funcPng:
-            if (func.name=='funcComfort') or \
-                (func.name=='funcAward'):
-                bFind,x,y,w,h=bFindInBackground(background,func,0.95)
-                if bFind:funcList3[func.name]=(x,y,w,h)
-        if 'funcComfort' in funcList3:
-            pos=funcList3['funcComfort']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcAward' in funcList3:
-            pos=funcList3['funcAward']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             return
 
         #寻找新关卡（mult匹配）

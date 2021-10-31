@@ -5,8 +5,6 @@
 from tkinter import *
 from tkinter import ttk,filedialog
 import time
-from common import *
-from monitor import *
 
 #时钟
 class Watch(Frame):
@@ -14,11 +12,11 @@ class Watch(Frame):
     def __init__(self,parent=None,**kw):
         Frame.__init__(self,parent,kw)
         self._running=False
-        self.timestr=StringVar()
+        self.timeStr=StringVar()
         self._start=time.time()
         self.makeWidgets()
     def makeWidgets(self):
-        l1=Label(self,textvariable=self.timestr,font=("",12))
+        l1=Label(self,textvariable=self.timeStr,font=("",12))
         l1.pack()
     def _update(self):
         self._settime()
@@ -28,19 +26,100 @@ class Watch(Frame):
         minutes='{:0>2d}'.format(int((time.time()-self._start)/60%60))
         today=str(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))+\
             '  已启动:'+hours+'小时'+minutes+'分钟'
-        self.timestr.set(today)
+        self.timeStr.set(today)
     def start(self):
         self._update()
-        self.place(x=85,y=250)
+        self.place(x=85,y=280)
 
-class MyGui():
+#状态
+class Status(Frame):
+    msec=1000
+    def __init__(self,parent=None,**kw):
+        Frame.__init__(self,parent,kw)
+        self._running=False
+        self.statusStr=StringVar()
+        self.makeWidgets()
+    def makeWidgets(self):
+        l1=Label(self,textvariable=self.statusStr,font=("",12))
+        l1.pack()
+    def _update(self):
+        self._setStatus()
+        self.timer=self.after(self.msec,self._update)
+    def _setStatus(self):
+        status='通关次数='+str(MyGui.gFinish)+'  关卡='+str(MyGui.gRound)+\
+            '  战斗='+str(MyGui.gContinue)+'/'+str(MyGui.gInterval)+'秒'
+        self.statusStr.set(status)
+    def start(self):
+        self._update()
+        self.place(x=115,y=220)
+
+#调试
+class Debug(Frame):
+    msec=100
+    def __init__(self,parent=None,**kw):
+        Frame.__init__(self,parent,kw)
+        self._running=False
+        self.logStr=StringVar()
+        self.makeWidgets()
+    def makeWidgets(self):
+        l1=Label(self,textvariable=self.logStr,foreground='red',font=("",11))
+        l1.pack()
+    def _update(self):
+        self._setLog()
+        self.timer=self.after(self.msec,self._update)
+    def _setLog(self):
+        log=str(MyGui.gLog)
+        log=log.replace('resource/','')
+        log=log.replace('.png','')
+        self.logStr.set(log)
+    def start(self):
+        self._update()
+        self.place(x=10,y=250)
+
+#调试
+class Wait(Frame):
+    msec=100
+    def __init__(self,parent=None,**kw):
+        Frame.__init__(self,parent,kw)
+        self._running=False
+        self.waitStr=StringVar()
+        self.makeWidgets()
+    def makeWidgets(self):
+        l1=Label(self,textvariable=self.waitStr,foreground='red',font=("",11))
+        l1.pack()
+    def _update(self):
+        self._setWait()
+        self.timer=self.after(self.msec,self._update)
+    def _setWait(self):
+        if MyGui.gWait>=0.1:
+            MyGui.gWait-=0.1
+        wait=str(round(MyGui.gWait,1))
+        self.waitStr.set(wait+'s RC')
+    def start(self):
+        self._update()
+        self.place(x=10,y=280)
+
+class MyGui(object):
+
+    gRound=0
+    gFinish=0
+
+    gReboot=1
+    gContinue=0
+    gInterval=300
+
+    bRunning=True
+    gRunTime=time.time()
+
+    gLog=None
+    gWait=0.0
 
     def __init__(self):
         self.win=Tk()
         self.win.title('炉石AI--by琴弦上的宇宙') #标题
-        self.win.attributes('-alpha',0.9) #透明度
+        self.win.attributes('-alpha',1.0) #透明度
         self.win.attributes('-topmost',True) #置顶
-        self.win.geometry("420x280+20+20") #大小和位置
+        self.win.geometry("420x310+0+360") #大小和位置
         self.win.resizable(width=False,height=False)
 
         self.lb1=Label(self.win,text='战网启动器：',font=("",12))
@@ -88,8 +167,14 @@ class MyGui():
         self.lb9.place(x=10,y=220)
 
         self.btn2=Button(self.win,text='运行',width=10,height=8,font=("",12),command=None)
-        self.btn2.place(x=315,y=70)
+        self.btn2.place(x=315,y=60)
 
+        self.status=Status(self.win)
+        self.status.start()
+        self.debug=Debug(self.win)
+        self.debug.start()
+        self.wait=Wait(self.win)
+        self.wait.start()
         self.watch=Watch(self.win)
         self.watch.start()
 
@@ -104,4 +189,4 @@ class MyGui():
         self.text1.insert(INSERT,file)
 
     def setInterval(self):
-        Monitor.interval=180
+        self.gInterval=180

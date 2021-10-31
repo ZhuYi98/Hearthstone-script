@@ -7,6 +7,7 @@ import time
 import random
 import numpy as np
 from common import *
+from myGui import *
 
 def myNms(dets,thresh):
     x1=dets[:,0]
@@ -32,7 +33,7 @@ def myNms(dets,thresh):
         order=order[inds+1]
     return keep
 
-gDebug=0
+gDebug=1
 gShow=0
 
 def bFindInBackground(background,tempPng,threshold=0.80):
@@ -43,7 +44,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
         x=maxLoc[0]
         y=maxLoc[1]
         if gDebug:
-            print(tempPng.path+' single matched, maxVal='+str(maxVal))
+            MyGui.gLog=tempPng.path+' S='+str(round(maxVal,2))
             if gShow:
                 img=cv2.imread("resource/background.png",1)
                 cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
@@ -54,7 +55,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
         return True,x,y,w,h
     else:
         if gDebug:
-            print(tempPng.path+' not single match, maxVal='+str(maxVal))
+            MyGui.gLog=tempPng.path+' NS='+str(round(maxVal,2))
         return False,0,0,0,0
 
 def bFindMultInBackground(background,tempPng,threshold=0.80):
@@ -93,8 +94,7 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
     
     if i>=1:
         if gDebug:
-            print(tempPng.path+' mult matched')
-            print(okList)
+            MyGui.gLog=tempPng.path+' M'
             if gShow:
                 img=cv2.imread("resource/background.png",1)
                 for p in okList:
@@ -108,5 +108,5 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
         return True,okList
     else:
         if gDebug:
-            print(tempPng.path+' not mult match, maxVal='+str(maxVal))
+            MyGui.gLog=tempPng.path+' NM='+str(round(maxVal,2))
         return False,okList

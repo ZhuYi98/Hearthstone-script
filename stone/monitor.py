@@ -8,28 +8,13 @@ import win32com.client
 from common import *
 from myGui import *
 
-class Monitor():
+class Monitor(object):
 
     processBattleExe='Battle.net.exe'
     processStoneExe='Hearthstone.exe'
-    interval=3600
-    bRunning=True
-    runTime=int(time.time())
 
     def __init__(self):
         pass
-
-    def bRunning(self):
-        return self.bRunning
-
-    def setRunning(self,result):
-        self.bRunning=result
-
-    def getRunTime(self):
-        return self.runTime
-
-    def setRunTime(self):
-        self.runTime=int(time.time())
 
     def bProcessExist(self,processName):
         WMI=win32com.client.GetObject('winmgmts:')
@@ -49,15 +34,14 @@ class Monitor():
             if self.bProcessExist(self.processStoneExe):
                 if self.bProcessExist(self.processBattleExe):
                     self.killProcess(self.processBattleExe)
-                    self.setRunning(True)
-                    self.setRunTime()
-            if self.bRunning:
-                cnt=int(time.time())-self.getRunTime()
-                if cnt>=self.interval:
-                    self.setRunning(False)
+            if MyGui.bRunning:
+                MyGui.gContinue=int(time.time()-MyGui.gRunTime)
+                if MyGui.gContinue>=MyGui.gInterval:
                     self.killProcess(self.processStoneExe)
                     time.sleep(2)
                     self.startProcess(self.processBattleExe)
+                    MyGui.gReboot=1
+                    MyGui.gRunTime=time.time()
 
 def threadMonitor():
     monitor=Monitor()

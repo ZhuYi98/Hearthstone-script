@@ -2,30 +2,44 @@
 #作者：琴弦上的宇宙
 #时间：2021年10月22日
 
+import cv2
+import sys
 import pyautogui
 import time
 import random
 import numpy as np
 from myGui import *
-from openCv import *
 
-def moveAndClick(x,y):
-    if x>=10 and x<=1910 and y>=10 and y<=1070:
+w,h=pyautogui.size()
+def moveAndClick(x,y,t=1.5):
+    if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
+        MyGui.gWait=t+0.5
         pyautogui.moveTo(x,y)
-        pyautogui.click(clicks=1)
-        time.sleep(1)
+        pyautogui.mouseUp(x,y)
+        time.sleep(0.1)
+        pyautogui.click(clicks=2,interval=0.1)
+        pyautogui.mouseUp(x,y)
+        time.sleep(0.3)
         pyautogui.moveTo(10,10)
-        pyautogui.click(clicks=1)
+        time.sleep(t)
 
 def drag(x0,y0,x1,y1):
-    if x0>=10 and x0<=1910 and y0>=10 and y0<=1070 and \
-       x1>=10 and x1<=1910 and y1>=10 and y1<=1070:
+    if x0>=10 and x0<=(w-10) and y0>=10 and y0<=(h-10) and \
+       x1>=10 and x1<=(w-10) and y1>=10 and y1<=(h-10):
         pyautogui.mouseDown(x0,y0)
         pyautogui.moveTo(x1,y1)
         time.sleep(0.2)
         pyautogui.mouseUp(x1,y1)
         pyautogui.moveTo(10,10,)
-        pyautogui.click(clicks=1)
+
+class MyLog(object):
+    def __init__(self):
+        self.orgstdout=sys.stdout
+        self.log=open("log/log.txt","a")
+
+    def write(self,msg):
+        self.orgstdout.write(msg)
+        self.log.write(msg)
 
 class myPng(object):
     def __init__(self,path,name):

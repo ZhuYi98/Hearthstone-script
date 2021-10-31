@@ -30,4 +30,8 @@ class scStoneStart(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStart' in funcList:
             pos=funcList['funcStart']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,10)
+        else:
+            if 'funcGame' in funcList:
+                pos=funcList['funcGame']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

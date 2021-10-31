@@ -5,6 +5,7 @@
 import os
 from common import *
 from openCv import *
+from myGui import *
 
 class scPveFightQuit(myScene):
     def __init__(self):
@@ -31,6 +32,7 @@ class scPveFightQuit(myScene):
         if 'funcInsure' in funcList:
             pos=funcList['funcInsure']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            MyGui.gFinish+=1
         elif 'funcQuit' in funcList:
             pos=funcList['funcQuit']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
