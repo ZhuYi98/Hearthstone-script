@@ -35,7 +35,7 @@
 
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-pip install opencv-python
+pip install opencv-python \n
 pip install pillow
 pip install pyautogui
 pip install win32gui
