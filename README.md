@@ -33,9 +33,12 @@
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+pip install opencv-python
+pip install pillow
+pip install pyautogui
+pip install win32gui
 
 #### 使用说明
 
