@@ -142,10 +142,11 @@ class AutoAi(object):
 
     def run(self):
         while True:
-            if MyGui.gReboot:
-                #self.setMode('modePvpSurrender')
-                self.setMode('modePve')
-                MyGui.gReboot=0
             MyGui.gWait=0.1
             time.sleep(0.1)
-            self.procScene()
+            if MyGui.bRunning:
+                if MyGui.gReboot:
+                    #self.setMode('modePvpSurrender')
+                    self.setMode('modePve')
+                    MyGui.gReboot=0
+                self.procScene()

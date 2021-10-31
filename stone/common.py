@@ -15,9 +15,9 @@ def moveAndClick(x,y,t=1.5):
     if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
         MyGui.gWait=t+0.5
         pyautogui.moveTo(x,y)
-        pyautogui.mouseUp(x,y)
         time.sleep(0.1)
-        pyautogui.click(clicks=2,interval=0.1)
+        pyautogui.mouseDown(x,y)
+        time.sleep(0.1)
         pyautogui.mouseUp(x,y)
         time.sleep(0.3)
         pyautogui.moveTo(10,10)

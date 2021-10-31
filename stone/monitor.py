@@ -31,16 +31,20 @@ class Monitor(object):
     def run(self):
         while True:
             time.sleep(1)
-            if self.bProcessExist(self.processStoneExe):
-                if self.bProcessExist(self.processBattleExe):
-                    self.killProcess(self.processBattleExe)
             if MyGui.bRunning:
+                if self.bProcessExist(self.processStoneExe):
+                    if self.bProcessExist(self.processBattleExe):
+                        self.killProcess(self.processBattleExe)
+                else:
+                    self.startProcess(self.processBattleExe)
                 MyGui.gContinue=int(time.time()-MyGui.gRunTime)
                 if MyGui.gContinue>=MyGui.gInterval:
-                    self.killProcess(self.processStoneExe)
+                    if self.bProcessExist(self.processStoneExe):
+                        self.killProcess(self.processStoneExe)
                     time.sleep(2)
                     self.startProcess(self.processBattleExe)
                     MyGui.gReboot=1
+                    MyGui.gRebootCnt+=1
                     MyGui.gRunTime=time.time()
 
 def threadMonitor():

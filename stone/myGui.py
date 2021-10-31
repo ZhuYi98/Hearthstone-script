@@ -25,7 +25,7 @@ class Watch(Frame):
         hours='{:0>2d}'.format(int((time.time()-self._start)/3600))
         minutes='{:0>2d}'.format(int((time.time()-self._start)/60%60))
         today=str(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))+\
-            '  已启动:'+hours+'小时'+minutes+'分钟'
+            ' 已启动'+hours+':'+minutes+' 重启'+str(MyGui.gRebootCnt)+'次'
         self.timeStr.set(today)
     def start(self):
         self._update()
@@ -107,8 +107,9 @@ class MyGui(object):
     gReboot=1
     gContinue=0
     gInterval=300
+    gRebootCnt=0
 
-    bRunning=True
+    bRunning=False
     gRunTime=time.time()
 
     gLog=None
@@ -116,7 +117,7 @@ class MyGui(object):
 
     def __init__(self):
         self.win=Tk()
-        self.win.title('炉石AI--by琴弦上的宇宙') #标题
+        self.win.title('炉石AI--By琴弦上的宇宙') #标题
         self.win.attributes('-alpha',1.0) #透明度
         self.win.attributes('-topmost',True) #置顶
         self.win.geometry("420x310+0+360") #大小和位置
@@ -166,7 +167,8 @@ class MyGui(object):
         self.lb9=Label(self.win,text='运行状态：',font=("",12))
         self.lb9.place(x=10,y=220)
 
-        self.btn2=Button(self.win,text='运行',width=10,height=8,font=("",12),command=None)
+        self.btn2=Button(self.win,text='运行',width=10,height=8,\
+            foreground='blue',font=("",12),command=self.startAi)
         self.btn2.place(x=315,y=60)
 
         self.status=Status(self.win)
@@ -178,10 +180,17 @@ class MyGui(object):
         self.watch=Watch(self.win)
         self.watch.start()
 
-    def startaI(self):
-        file=filedialog.askopenfilename()
-        self.text1.delete(0.0,END)
-        self.text1.insert(INSERT,file)
+    def startAi(self):
+        if self.btn2['text']=='运行':
+            MyGui.bRunning=True
+            MyGui.gRunTime=time.time()
+            self.btn2['foreground']='green'
+            self.btn2['text']='运行中...'
+            
+        else:
+            MyGui.bRunning=False
+            self.btn2['foreground']='blue'
+            self.btn2['text']='运行'
 
     def setBattle(self):
         file=filedialog.askopenfilename()
