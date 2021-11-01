@@ -242,7 +242,7 @@ class MyGui(object):
         MyGui.gInterval=int(self.text2.get(0.0,END))
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
-        config.set("config","interval",self.text2.get(0.0,END))
+        config.set("config","interval",self.text2.get(0.0,END).replace('\n',''))
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()
