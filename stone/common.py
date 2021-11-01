@@ -23,10 +23,16 @@ def moveAndClick(x,y,t=1.5):
         pyautogui.moveTo(10,10)
         time.sleep(t)
 
+def Click(x,y):
+    if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
+        pyautogui.mouseDown(x,y)
+        pyautogui.mouseUp(x,y)
+
 def drag(x0,y0,x1,y1):
     if x0>=10 and x0<=(w-10) and y0>=10 and y0<=(h-10) and \
        x1>=10 and x1<=(w-10) and y1>=10 and y1<=(h-10):
         pyautogui.mouseDown(x0,y0)
+        time.sleep(0.1)
         pyautogui.moveTo(x1,y1)
         time.sleep(0.2)
         pyautogui.mouseUp(x1,y1)
