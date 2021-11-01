@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# user
+background.png
+config/error/*.png
+
 # C extensions
 *.so
 
