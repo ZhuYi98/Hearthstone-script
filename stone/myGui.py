@@ -186,7 +186,6 @@ class MyGui(object):
             MyGui.gRunTime=time.time()
             self.btn2['foreground']='green'
             self.btn2['text']='运行中...'
-            
         else:
             MyGui.bRunning=False
             self.btn2['foreground']='blue'

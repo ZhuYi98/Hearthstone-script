@@ -18,7 +18,7 @@ class scFightBox(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.75)
                 if bFind:tagList[tag.name]=(x,y,w,h)
             if ('tag1' in tagList) or \
                ('tag2' in tagList) or \
