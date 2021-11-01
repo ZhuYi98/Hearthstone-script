@@ -18,7 +18,6 @@ class Monitor(object):
         pass
 
     def bProcessExist(self,processName):
-        return False
         WMI=win32com.client.GetObject('winmgmts:')
         processCodeCov=WMI.ExecQuery('select * from Win32_Process where Name="%s"' % processName)
         if len(processCodeCov)>0:return True
@@ -74,6 +73,8 @@ class Monitor(object):
                         MyGui.gRunTime=time.time()
                     MyGui.gContinue=int(time.time()-MyGui.gRunTime)
                     if MyGui.gContinue>MyGui.gInterval:
+                        pyautogui.screenshot(str(time.strftime(
+                            'config/error/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
                         if self.bProcessExist(self.processBattleExe):
                             self.killProcess(self.processBattleExe)
                         if self.bProcessExist(self.processStoneExe):

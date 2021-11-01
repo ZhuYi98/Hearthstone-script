@@ -5,7 +5,7 @@ __pycache__/
 
 # user
 background.png
-config/error/*.png
+stone/config/error/
 
 # C extensions
 *.so
