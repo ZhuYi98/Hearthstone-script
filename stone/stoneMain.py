@@ -2,6 +2,7 @@
 #作者：琴弦上的宇宙
 #时间：2021年10月22日
 
+import ctypes
 from threading import Thread
 from myGui import *
 from autoAi import *
@@ -9,7 +10,6 @@ from monitor import *
 
 #隐藏控制台
 if 1:
-    import ctypes
     hWnd=ctypes.windll.kernel32.GetConsoleWindow()
     if hWnd!=0:
         ctypes.windll.user32.ShowWindow(hWnd,0)

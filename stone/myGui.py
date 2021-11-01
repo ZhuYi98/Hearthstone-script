@@ -5,6 +5,8 @@
 from tkinter import *
 from tkinter import ttk,filedialog
 import time
+import datetime
+import configparser
 
 #时钟
 class Watch(Frame):
@@ -109,13 +111,28 @@ class MyGui(object):
     gInterval=300
     gRebootCnt=0
 
+    bAutoAi=False
     bRunning=False
     gRunTime=time.time()
 
     gLog=None
     gWait=0.0
 
+    gBattlePath=None
+
+    gStartTime=None
+    gEndTime=None
+
     def __init__(self):
+
+        #读取配置文件
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        MyGui.gBattlePath=config.get('config','battlePath')
+        MyGui.gInterval=int(config.get('config','interval'))
+        MyGui.gStartTime=config.get('config','startTime')
+        MyGui.gEndTime=config.get('config','endTime')
+
         self.win=Tk()
         self.win.title('炉石AI--By琴弦上的宇宙') #标题
         self.win.attributes('-alpha',1.0) #透明度
@@ -127,6 +144,10 @@ class MyGui(object):
         self.lb1.place(x=10,y=10)
         self.text1=Text(self.win,width=20,height=1,font=("",12))
         self.text1.place(x=120,y=10)
+        self.text1.delete(0.0,END)
+        self.text1.insert(INSERT,MyGui.gBattlePath)
+        self.text1.config(state=DISABLED)
+
         self.btn1=Button(self.win,text='选择启动器',font=("",12),command=self.setBattle)
         self.btn1.place(x=315,y=10)
 
@@ -152,17 +173,31 @@ class MyGui(object):
 
         self.lb6=Label(self.win,text='防掉线检测：',font=("",12))
         self.lb6.place(x=10,y=160)
-        self.cmb5=ttk.Combobox(self.win)
-        self.cmb5.place(x=120,y=160)
+        self.lb60=Label(self.win,text='秒',font=("",12))
+        self.lb60.place(x=190,y=160)
+        self.text2=Text(self.win,width=8,height=1,font=("",12))
+        self.text2.place(x=120,y=160)
+        self.text2.delete(0.0,END)
+        self.text2.insert(INSERT,MyGui.gInterval)
+        self.btn22=Button(self.win,text='确定',width=5,height=1,\
+            font=("",12),command=self.setInterval)
+        self.btn22.place(x=230,y=157)
 
         self.lb7=Label(self.win,text='监控时间：',font=("",12))
         self.lb7.place(x=10,y=190)
-        self.text2=Text(self.win,width=8,height=1,font=("",12))
-        self.text2.place(x=120,y=190)
+        self.text3=Text(self.win,width=5,height=1,font=("",12))
+        self.text3.place(x=120,y=190)
+        self.text3.delete(0.0,END)
+        self.text3.insert(INSERT,MyGui.gStartTime)
         self.lb8=Label(self.win,text='-',font=("",12))
-        self.lb8.place(x=190,y=190)
-        self.text3=Text(self.win,width=8,height=1,font=("",12))
-        self.text3.place(x=210,y=190)
+        self.lb8.place(x=165,y=190)
+        self.text4=Text(self.win,width=5,height=1,font=("",12))
+        self.text4.place(x=180,y=190)
+        self.text4.delete(0.0,END)
+        self.text4.insert(INSERT,MyGui.gEndTime)
+        self.btn33=Button(self.win,text='确定',width=5,height=1,\
+            font=("",12),command=self.setRunTime)
+        self.btn33.place(x=230,y=187)
 
         self.lb9=Label(self.win,text='运行状态：',font=("",12))
         self.lb9.place(x=10,y=220)
@@ -193,8 +228,32 @@ class MyGui(object):
 
     def setBattle(self):
         file=filedialog.askopenfilename()
+        MyGui.gBattlePath=file
         self.text1.delete(0.0,END)
         self.text1.insert(INSERT,file)
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","battlePath",file)
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()
 
     def setInterval(self):
-        self.gInterval=180
+        MyGui.gInterval=int(self.text2.get(0.0,END))
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","interval",self.text2.get(0.0,END))
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()
+
+    def setRunTime(self):
+        MyGui.gStartTime=self.text3.get(0.0,END)
+        MyGui.gEndTime=self.text4.get(0.0,END)
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","startTime",MyGui.gStartTime.replace('\n',''))
+        config.set("config","endTime",MyGui.gEndTime.replace('\n',''))
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()

@@ -144,7 +144,7 @@ class AutoAi(object):
         while True:
             MyGui.gWait=0.1
             time.sleep(0.1)
-            if MyGui.bRunning:
+            if MyGui.bAutoAi:
                 if MyGui.gReboot:
                     #self.setMode('modePvpSurrender')
                     self.setMode('modePve')
