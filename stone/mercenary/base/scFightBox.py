@@ -39,15 +39,15 @@ class scFightBox(myScene):
             bFind,x,y,w,h=bFindInBackground(background,func,0.80)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcPass1' in funcList:
+            pyautogui.screenshot(str(time.strftime(
+                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
             pos=funcList['funcPass1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+        if 'funcPass2' in funcList:
             pyautogui.screenshot(str(time.strftime(
                 'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
-        if 'funcPass2' in funcList:
             pos=funcList['funcPass2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
-            pyautogui.screenshot(str(time.strftime(
-                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
         elif 'funcBox1' in funcList:
             pos=funcList['funcBox1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)

@@ -23,20 +23,24 @@ def moveAndClick(x,y,t=1.5):
         pyautogui.moveTo(10,10)
         time.sleep(t)
 
-def Click(x,y):
+def Click(x,y,t=0):
     if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
+        pyautogui.moveTo(x,y)
         pyautogui.mouseDown(x,y)
         pyautogui.mouseUp(x,y)
+        time.sleep(t)
 
-def drag(x0,y0,x1,y1):
+def drag(x0,y0,x1,y1,t=1.5):
     if x0>=10 and x0<=(w-10) and y0>=10 and y0<=(h-10) and \
        x1>=10 and x1<=(w-10) and y1>=10 and y1<=(h-10):
+        pyautogui.moveTo(x0,y0)
         pyautogui.mouseDown(x0,y0)
         time.sleep(0.1)
         pyautogui.moveTo(x1,y1)
         time.sleep(0.2)
         pyautogui.mouseUp(x1,y1)
         pyautogui.moveTo(10,10,)
+        time.sleep(t)
 
 class MyLog(object):
     def __init__(self):

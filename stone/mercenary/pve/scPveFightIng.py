@@ -24,95 +24,92 @@ class scPveFightIng(myScene):
             return False
 
     def proc(self,background):
-        funcList={}
-        for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-            if bFind:funcList[func.name]=(x,y,w,h)
+        bFindAoe=False
+        i=0
+        xOri=843
+        yOri=559
+        diff1=[-10,-50]
+        diff2=[100,-180]
+        while True:
+            pyautogui.screenshot("resource/background.png")
+            background=cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
+            if not self.isOwn(background):
+                return
 
-        #准备开始
-        if 'funcHeroNone1' in funcList:
-            pos=funcList['funcHeroNone1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcHeroNone2' in funcList:
-            pos=funcList['funcHeroNone2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcHeroNone3' in funcList:
-            pos=funcList['funcHeroNone3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-
-        #AOE技能
-        if 'funcSkill1' in funcList:
-            pos=funcList['funcSkill1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill2' in funcList:
-            pos=funcList['funcSkill2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill3' in funcList:
-            pos=funcList['funcSkill3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill4' in funcList:
-            pos=funcList['funcSkill4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill5' in funcList:
-            pos=funcList['funcSkill5']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill6' in funcList:
-            pos=funcList['funcSkill6']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill7' in funcList:
-            pos=funcList['funcSkill7']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-        elif 'funcSkill8' in funcList:
-            pos=funcList['funcSkill8']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
-
-        #寻找通用技能
-        for func in self.funcPng:
-            if (func.name=='funcSkillCom'):
-                bFind,okList=bFindMultInBackground(background,func,0.80)
+            #准备开始
+            funcList={}
+            for func in self.funcPng:
+                bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                 if bFind:
-                    diff1=[-10,-50]
-                    diff2=[-200,-180]
-                    okList.sort()
-                    first=okList[0]
-                    x0=first[0]+first[2]/2+diff1[0]
-                    y0=first[1]+first[3]/2+diff1[1]
-                    x1=first[0]+first[2]/2+diff2[0]
-                    y1=first[1]+first[3]/2+diff2[1]
-                    drag(x0,y0,x1,y1)
-                    i=0
-                    while i<13:
-                        i+=1
-                        time.sleep(0)
-                        x2=x1+50*i
-                        Click(x2,y1)
-                    return
-
-        #寻找未释放技能
-        for func in self.funcPng:
-            if (func.name=='funcSkillNo'):
+                    funcList[func.name]=(x,y,w,h)
+                    break
+            if 'funcHeroNone1' in funcList:
+                pos=funcList['funcHeroNone1']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                return
+            elif 'funcHeroNone2' in funcList:
+                pos=funcList['funcHeroNone2']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                return
+            elif 'funcHeroNone3' in funcList:
+                pos=funcList['funcHeroNone3']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                return
+            
+            #寻找技能
+            for func in self.funcPng:
+                if (func.name=='funcSkill1') or \
+                    (func.name=='funcSkill2') or \
+                    (func.name=='funcSkill3') or \
+                    (func.name=='funcSkill4') or \
+                    (func.name=='funcSkill5') or \
+                    (func.name=='funcSkill6') or \
+                    (func.name=='funcSkill7') or \
+                    (func.name=='funcSkill8'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                    if bFind:
+                        bFindAoe=True
+                        moveAndClick(x+w/2,y+h/2)
+                        break
+                    else:
+                        bFindAoe=False
+            if not bFindAoe:
+                func=None
+                for f in self.funcPng:
+                    if f.name=='funcSkillNo':
+                        func=f
+                        break
                 bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                 if bFind:
                     diff=[-30,60]
                     moveAndClick(x+w/2+diff[0],y+h/2+diff[1])
-                    return
+                    continue
  
-        #技能释放结束
-        if 1:
-            if 'funcOk' in funcList:
-                pos=funcList['funcOk']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            elif 'funcError' in funcList:
-                pos=funcList['funcError']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+                for f in self.funcPng:
+                    if f.name=='funcSkillCom':
+                        func=f
+                        break
+                bFind,okList=bFindMultInBackground(background,func,0.70)
+                if bFind:
+                    i=0
+                    '''
+                    pos=okList[random.randint(0,len(okList)-1)]
+                    pos=okList[0]
+                    x=pos[0]+pos[2]/2
+                    y=pos[1]+pos[3]/2
+                    '''
+                    drag(xOri+diff1[0],yOri+diff1[1],xOri+diff2[0],yOri+diff2[1],1.5)
+                    #moveAndClick(xOri+diff1[0],yOri+diff1[1])
+                else:
+                    for func in self.funcPng:
+                        if (func.name=='funcOk'):
+                            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                            if bFind:
+                                moveAndClick(x+w/2,y+h/2,10)
+                                return
+                    x1=xOri+diff2[0]
+                    y1=yOri+diff2[1]
+                    x2=x1+30*i
+                    #moveAndClick(x2,y1)
+                    Click(x2,y1,1.5)
+                    i+=1

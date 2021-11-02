@@ -47,15 +47,15 @@ class scSingleHand(myScene):
             pos=funcList['func1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'func2' in funcList:
+            pyautogui.screenshot(str(time.strftime(
+                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
             pos=funcList['func2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif 'func3' in funcList:
             pyautogui.screenshot(str(time.strftime(
                 'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
-        elif 'func3' in funcList:
             pos=funcList['func3']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            pyautogui.screenshot(str(time.strftime(
-                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
         elif 'func4' in funcList:
             pos=funcList['func4']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
