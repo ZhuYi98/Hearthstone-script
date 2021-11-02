@@ -45,7 +45,6 @@ class scPveSelectTreasury(myScene):
                     pos=funcList['funcHold']
                     moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
                 MyGui.gRound+=1
-                MyGui.gRunTime=time.time()
             elif 'funcTreasury' in funcList:
                 pos=funcList['funcTreasury']
                 rand=[150,360,570]

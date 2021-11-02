@@ -28,15 +28,21 @@ class scPveSelectLevel(myScene):
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
-        level='2_6'
-        if level=='1_1':
+        if MyGui.gLevel=='S1-1':
             if 'funcLevel_1_1' in funcList and 'funcStart' in funcList:
                 pos=funcList['funcStart']
                 moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
             elif 'funcSel_1_1' in funcList:
                 pos=funcList['funcSel_1_1']
                 moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif level=='2_6':
+        elif MyGui.gLevel=='S2-5':
+            if 'funcLevel_2_5' in funcList and 'funcStart' in funcList:
+                pos=funcList['funcStart']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            elif 'funcSel_2_5' in funcList:
+                pos=funcList['funcSel_2_5']
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+        elif MyGui.gLevel=='S2-6':
             if 'funcLevel_2_6' in funcList and 'funcStart' in funcList:
                 pos=funcList['funcStart']
                 moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

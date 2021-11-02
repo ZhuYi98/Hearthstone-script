@@ -110,14 +110,12 @@ class AutoAi(object):
         for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)
-                if   scene.name=='PveFightChoose':
+                if scene.name=='PveFightChoose':
                     self.disScene('StoneStart')
                     self.disScene('StoneInsure')
                     self.disScene('ModeChoose')
                     self.disScene('PointChoose')
                     self.disScene('PveSelectZone')
-                    self.disScene('PveSelectLevel')
-                    self.disScene('SelectCard')
                 elif scene.name=='PveFightIng':
                     self.disScene('PveFightChoose')
                     self.disScene('PveFightQuit')
@@ -125,6 +123,8 @@ class AutoAi(object):
                     self.disScene('PveSelectSurprise')
                     self.disScene('FightBox')
                     self.disScene('PveFightFinish')
+                    self.disScene('PveSelectLevel')
+                    self.disScene('SelectCard')
                 elif scene.name=='SingleHand':
                     self.enableScene('PveFightChoose')
                     self.enableScene('PveFightQuit')
@@ -132,9 +132,6 @@ class AutoAi(object):
                     self.enableScene('PveSelectSurprise')
                     self.enableScene('FightBox')
                     self.enableScene('PveFightFinish')
-                    self.enableScene('PveSelectLevel')
-                    self.enableScene('SelectCard')
-                elif scene.name=='PveFightFinish':
                     self.enableScene('PveSelectLevel')
                     self.enableScene('SelectCard')
                 break

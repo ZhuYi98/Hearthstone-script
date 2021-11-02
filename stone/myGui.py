@@ -123,6 +123,8 @@ class MyGui(object):
     gStartTime=None
     gEndTime=None
 
+    gLevel='S2-5'
+
     def __init__(self):
 
         #读取配置文件

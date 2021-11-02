@@ -45,6 +45,7 @@ class scPveFightChoose(myScene):
         if 'funcStartInter' in funcList:
             pos=funcList['funcStartInter']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
+            MyGui.gRunTime=time.time()
             return True
         elif 'funcStartGoto' in funcList:
             pos=funcList['funcStartGoto']
@@ -90,6 +91,7 @@ class scPveFightChoose(myScene):
         if 'funcStartInter' in funcList2:
             pos=funcList2['funcStartInter']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,10)
+            MyGui.gRunTime=time.time()
             return
         elif 'funcStartGoto' in funcList2:
             pos=funcList2['funcStartGoto']

@@ -38,7 +38,7 @@ class scPveFightIng(myScene):
                     (func.name=='funcHeroNone2'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
-                        moveAndClick(x+w/2,y+h/2)
+                        moveAndClick(x+w/2,y+h/2,12)
                         return
 
             #是否技能全部释放完毕
