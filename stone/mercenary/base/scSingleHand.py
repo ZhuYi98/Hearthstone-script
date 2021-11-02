@@ -58,7 +58,7 @@ class scSingleHand(myScene):
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'func4' in funcList:
             pos=funcList['func4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
         elif 'func5' in funcList:
             pos=funcList['func5']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

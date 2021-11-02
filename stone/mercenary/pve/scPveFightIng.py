@@ -93,7 +93,8 @@ class scPveFightIng(myScene):
                     break
             bFind,okList=bFindMultInBackground(background,func,0.70)
             if bFind:
-                #特定数字，高效，需要根据自己界面调整（魔幻数字是真恶心）
+
+                #特定数字，高效，需要根据自己界面调整
                 xOri=843                #第一个技能x坐标
                 yOri=559                #第一个技能y坐标
                 diffHero=[-10,-50]      #第一个技能相对于英雄偏移量
@@ -101,7 +102,20 @@ class scPveFightIng(myScene):
                 Drag(xOri+diffHero[0],yOri+diffHero[1],xOri+diffEnemy[0],yOri+diffEnemy[1],1.5)
                 continue
 
-                #随机技能待调试
+                '''
+                随机技能待调试:
+                1、全局变量drag=None
+                2、判断到drag==None，说明第一次释放技能
+                    2.1随机选择一个技能
+                    2.2drag=当前技能图标，然后拖动，continue
+                3、判断到drag!=None，说明上次有拖动过，将drag图标在全局背景中查找，
+                    3.1查找到，说明drag是非指向性技能，进行点击操作，continue
+                    3.2未查到，说明drag是指向性技能，已经释放成功，然后
+                        3.1.1随机选择一个技能
+                        3.1.2drag=当前技能图标，然后拖动，continue
+                4、循环直到所有技能释放完毕
+                5、技能都释放完毕，重置drag=None
+                '''
                 if 0:
                     okList.sort()
                     pos=okList[random.randint(0,len(okList)-1)] 
