@@ -102,7 +102,7 @@ class scPveFightIng(myScene):
                 continue
 
                 #随机技能待调试
-                if 0：
+                if 0:
                     okList.sort()
                     pos=okList[random.randint(0,len(okList)-1)] 
                     #pos=okList[0]
