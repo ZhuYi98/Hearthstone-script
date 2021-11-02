@@ -32,22 +32,31 @@ class scSelectCard(myScene):
             return False
 
     def proc(self,background):
-        funcList={}
+
+        #选择卡组
+        oriPos=[[[645,395],[835,395],[1025,395]],
+                [[645,505],[835,505],[1025,505]],
+                [[645,615],[835,615],[1025,615]]]
+        card=MyGui.gCard.replace('\n','').split('-')
+        pos=oriPos[int(card[0])-1][int(card[1])-1]
+        moveAndClick(pos[0],pos[1])
+
+        #点击确定
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
-            if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcLock' in funcList:
-            pos=funcList['funcLock']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
-        else:
-            if 'funcCard1' in funcList:
-                if 'funcStart1' in funcList:
-                    pos=funcList['funcStart1']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
-                elif 'funcStart2' in funcList:
-                    pos=funcList['funcStart2']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,6)
-                MyGui.gRound=0
-            elif 'funcSel1' in funcList:
-                pos=funcList['funcSel1']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            if (func.name=='funcStart1') or \
+                (func.name=='funcStart2'):
+                bFind,x,y,w,h=bFindInBackground(background,func,0.90)
+                if bFind:
+                    MyGui.gRound=0
+                    moveAndClick(x+w/2,y+h/2,6)
+                    break
+
+        #点击锁定
+        background=SaveScreen()
+        for func in self.funcPng:
+            if (func.name=='funcLock'):
+                bFind,x,y,w,h=bFindInBackground(background,func,0.90)
+                if bFind:
+                    MyGui.gRound=0
+                    moveAndClick(x+w/2,y+h/2,6)
+                    break

@@ -46,6 +46,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
         if gDebug:
             MyGui.gLog=tempPng.path+' S='+str(round(maxVal,2))
             print(MyGui.gLog)
+            print(x,y,w,h)
             if gShow:
                 img=cv2.imread("resource/background.png",1)
                 cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)

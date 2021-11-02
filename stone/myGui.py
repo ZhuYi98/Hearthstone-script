@@ -124,6 +124,7 @@ class MyGui(object):
     gEndTime=None
 
     gLevel='S2-5'
+    gCard='1-1'
 
     def __init__(self):
 
@@ -131,6 +132,7 @@ class MyGui(object):
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         MyGui.gBattlePath=config.get('config','battlePath')
+        MyGui.gCard=config.get('config','card')
         MyGui.gInterval=int(config.get('config','interval'))
         MyGui.gStartTime=config.get('config','startTime')
         MyGui.gEndTime=config.get('config','endTime')
@@ -170,8 +172,18 @@ class MyGui(object):
 
         self.lb5=Label(self.win,text='卡组选择：',font=("",12))
         self.lb5.place(x=10,y=130)
-        self.cmb4=ttk.Combobox(self.win)
+        self.cmb4=ttk.Combobox(self.win,width=10,font=("",11))
+        self.cmb4['values']=\
+            ['第1行第1个','第1行第2个','第1行第3个',\
+             '第2行第1个','第2行第2个','第2行第3个',\
+             '第3行第1个','第3行第2个','第3行第3个']
+        self.cmb4['state']='readonly'
+        card1=MyGui.gCard.replace('\n','').split('-')
+        self.cmb4.current(3*(int(card1[0])-1)+(int(card1[1])-1))
         self.cmb4.place(x=120,y=130)
+        self.btn44=Button(self.win,text='确定',width=5,height=1,\
+            font=("",12),command=self.setCard)
+        self.btn44.place(x=230,y=127)
 
         self.lb6=Label(self.win,text='防掉线检测：',font=("",12))
         self.lb6.place(x=10,y=160)
@@ -236,6 +248,32 @@ class MyGui(object):
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         config.set("config","battlePath",file)
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()
+
+    def setCard(self):
+        i=0
+        all=['第1行第1个','第1行第2个','第1行第3个',\
+             '第2行第1个','第2行第2个','第2行第3个',\
+             '第3行第1个','第3行第2个','第3行第3个']
+        name1=self.cmb4.get()
+        for name in all:
+            if name1!=name:i+=1
+            else:
+                if i==0:MyGui.gCard='1-1'
+                elif i==1:MyGui.gCard='1-2'
+                elif i==2:MyGui.gCard='1-3'
+                elif i==3:MyGui.gCard='2-1'
+                elif i==4:MyGui.gCard='2-2'
+                elif i==5:MyGui.gCard='2-3'
+                elif i==6:MyGui.gCard='3-1'
+                elif i==7:MyGui.gCard='3-2'
+                elif i==8:MyGui.gCard='3-3'
+                break
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","card",MyGui.gCard.replace('\n',''))
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()
