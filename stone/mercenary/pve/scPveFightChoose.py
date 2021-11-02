@@ -39,7 +39,9 @@ class scPveFightChoose(myScene):
                 (func.name=='funcStartGet') or \
                 (func.name=='funcStartSkip'):
                 bFind,x,y,w,h=bFindInBackground(background,func,0.95)
-                if bFind:funcList[func.name]=(x,y,w,h)
+                if bFind:
+                    funcList[func.name]=(x,y,w,h)
+                    break
         if 'funcStartInter' in funcList:
             pos=funcList['funcStartInter']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
@@ -82,14 +84,16 @@ class scPveFightChoose(myScene):
                 (func.name=='funcStartGet') or \
                 (func.name=='funcStartSkip'):
                 bFind,x,y,w,h=bFindInBackground(background,func,0.95)
-                if bFind:funcList2[func.name]=(x,y,w,h)
+                if bFind:
+                    funcList2[func.name]=(x,y,w,h)
+                    break
         if 'funcStartInter' in funcList2:
             pos=funcList2['funcStartInter']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,10)
             return
         elif 'funcStartGoto' in funcList2:
             pos=funcList2['funcStartGoto']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,8)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
             return
         elif 'funcStartShow' in funcList2:
             pos=funcList2['funcStartShow']

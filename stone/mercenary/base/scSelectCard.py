@@ -20,7 +20,9 @@ class scSelectCard(myScene):
             tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
-                if bFind:tagList[tag.name]=(x,y,w,h)
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+                    break
             if ('tag1' in tagList) or \
                ('tag2' in tagList):
                 return True

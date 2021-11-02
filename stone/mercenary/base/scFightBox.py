@@ -19,7 +19,9 @@ class scFightBox(myScene):
             tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.75)
-                if bFind:tagList[tag.name]=(x,y,w,h)
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+                    break
             if ('tag1' in tagList) or \
                ('tag2' in tagList) or \
                ('tag3' in tagList) or \
@@ -46,18 +48,18 @@ class scFightBox(myScene):
             SaveAwardPng()
             pos=funcList['funcPass2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
-        elif 'funcBox1' in funcList:
+        if 'funcBox1' in funcList:
             pos=funcList['funcBox1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
-        elif 'funcBox2' in funcList:
+        if 'funcBox2' in funcList:
             pos=funcList['funcBox2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
-        elif 'funcBox3' in funcList:
+        if 'funcBox3' in funcList:
             pos=funcList['funcBox3']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
-        elif 'funcBox4' in funcList:
+        if 'funcBox4' in funcList:
             pos=funcList['funcBox4']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
-        elif 'funcBox5' in funcList:
+        if 'funcBox5' in funcList:
             pos=funcList['funcBox5']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)

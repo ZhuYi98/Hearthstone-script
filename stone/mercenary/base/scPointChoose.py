@@ -27,7 +27,9 @@ class scPointChoose(myScene):
         funcList={}
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.90)
-            if bFind:funcList[func.name]=(x,y,w,h)
+            if bFind:
+                funcList[func.name]=(x,y,w,h)
+                break
         if 'funcPve' in funcList:
             pos=funcList['funcPve']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)

@@ -17,7 +17,7 @@ class scStoneInsure(myScene):
     def isOwn(self,background):
         if self.bValid:
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if not bFind:return False
             return True
         else:
@@ -26,7 +26,7 @@ class scStoneInsure(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcStart' in funcList:
             pos=funcList['funcStart']

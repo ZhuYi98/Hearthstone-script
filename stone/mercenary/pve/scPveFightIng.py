@@ -32,11 +32,10 @@ class scPveFightIng(myScene):
             background=SaveScreen()
             if not self.isOwn(background):return
 
-            #准备自动上英雄（后续所有情景都需要匹配到，例如剩余0/1时）
+            #准备自动上英雄
             for func in self.funcPng:
                 if (func.name=='funcHeroNone1') or \
-                    (func.name=='funcHeroNone2') or \
-                    (func.name=='funcHeroNone3'):
+                    (func.name=='funcHeroNone2'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         moveAndClick(x+w/2,y+h/2)
@@ -60,7 +59,8 @@ class scPveFightIng(myScene):
                     (func.name=='funcSkill5') or \
                     (func.name=='funcSkill6') or \
                     (func.name=='funcSkill7') or \
-                    (func.name=='funcSkill8'):
+                    (func.name=='funcSkill8') or \
+                    (func.name=='funcSkill9'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         bFindAoe=True

@@ -45,6 +45,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
         y=maxLoc[1]
         if gDebug:
             MyGui.gLog=tempPng.path+' S='+str(round(maxVal,2))
+            print(MyGui.gLog)
             if gShow:
                 img=cv2.imread("resource/background.png",1)
                 cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
@@ -56,6 +57,7 @@ def bFindInBackground(background,tempPng,threshold=0.80):
     else:
         if gDebug:
             MyGui.gLog=tempPng.path+' NS='+str(round(maxVal,2))
+            print(MyGui.gLog)
         return False,0,0,0,0
 
 def bFindMultInBackground(background,tempPng,threshold=0.80):
@@ -95,6 +97,7 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
     if i>=1:
         if gDebug:
             MyGui.gLog=tempPng.path+' M'
+            print(MyGui.gLog)
             if gShow:
                 img=cv2.imread("resource/background.png",1)
                 for p in okList:
@@ -109,4 +112,5 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
     else:
         if gDebug:
             MyGui.gLog=tempPng.path+' NM='+str(round(maxVal,2))
+            print(MyGui.gLog)
         return False,okList
