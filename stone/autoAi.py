@@ -106,8 +106,7 @@ class AutoAi(object):
             self.enableScene('SingleHand')
 
     def procScene(self):
-        pyautogui.screenshot("resource/background.png")
-        background=cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
+        background=SaveScreen()
         for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)

@@ -73,8 +73,7 @@ class Monitor(object):
                         MyGui.gRunTime=time.time()
                     MyGui.gContinue=int(time.time()-MyGui.gRunTime)
                     if MyGui.gContinue>MyGui.gInterval:
-                        pyautogui.screenshot(str(time.strftime(
-                            'config/error/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+                        SaveErrorPng()
                         if self.bProcessExist(self.processBattleExe):
                             self.killProcess(self.processBattleExe)
                         if self.bProcessExist(self.processStoneExe):
