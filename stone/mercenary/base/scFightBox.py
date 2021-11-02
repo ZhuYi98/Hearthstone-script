@@ -38,7 +38,7 @@ class scFightBox(myScene):
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.75)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcPass1' in funcList:
             SaveAwardPng()
