@@ -33,3 +33,4 @@ class scPveFightFinish(myScene):
             pos=funcList['funcFinish']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
             MyGui.gFinish+=1
+            MyGui.gRunTime=time.time()

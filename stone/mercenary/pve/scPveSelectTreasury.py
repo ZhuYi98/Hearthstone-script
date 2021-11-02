@@ -30,8 +30,8 @@ class scPveSelectTreasury(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcDis' in funcList and 'funcTreasury' in funcList:
             pos=funcList['funcTreasury']
-            pos1=[150,360,570]
-            moveAndClick(pos[0]+pos[2]/2+pos1[random.randint(0,2)],pos[1]+pos[3]/2,0)
+            rand=[150,360,570]
+            moveAndClick(pos[0]+pos[2]/2+rand[random.randint(0,2)],pos[1]+pos[3]/2,0)
             return
         else:
             if 'funcSelOk' in funcList:
@@ -44,7 +44,9 @@ class scPveSelectTreasury(myScene):
                 elif 'funcHold' in funcList:
                     pos=funcList['funcHold']
                     moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+                MyGui.gRound+=1
+                MyGui.gRunTime=time.time()
             elif 'funcTreasury' in funcList:
                 pos=funcList['funcTreasury']
-                pos1=[150,360,570]
-                moveAndClick(pos[0]+pos[2]/2+pos1[random.randint(0,2)],pos[1]+pos[3]/2,0)
+                rand=[150,360,570]
+                moveAndClick(pos[0]+pos[2]/2+rand[random.randint(0,2)],pos[1]+pos[3]/2,0)

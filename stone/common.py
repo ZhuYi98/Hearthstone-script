@@ -30,7 +30,7 @@ def Click(x,y,t=0):
         pyautogui.mouseUp(x,y)
         time.sleep(t)
 
-def drag(x0,y0,x1,y1,t=1.5):
+def Drag(x0,y0,x1,y1,t=1.5):
     if x0>=10 and x0<=(w-10) and y0>=10 and y0<=(h-10) and \
        x1>=10 and x1<=(w-10) and y1>=10 and y1<=(h-10):
         pyautogui.moveTo(x0,y0)
@@ -41,6 +41,18 @@ def drag(x0,y0,x1,y1,t=1.5):
         pyautogui.mouseUp(x1,y1)
         pyautogui.moveTo(10,10,)
         time.sleep(t)
+
+def SaveScreen():
+    pyautogui.screenshot("resource/background.png")
+    return cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
+
+def SaveAwardPng():
+    pyautogui.screenshot(str(time.strftime(
+        'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+
+def SaveErrorPng():
+    pyautogui.screenshot(str(time.strftime(
+        'config/error/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
 
 class MyLog(object):
     def __init__(self):

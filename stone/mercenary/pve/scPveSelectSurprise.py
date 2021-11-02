@@ -24,11 +24,14 @@ class scPveSelectSurprise(myScene):
             return False
 
     def proc(self,background):
+
+        #匹配图片
         funcList={}
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
 
+        #选择完毕
         if 'funcSel' in funcList and 'funcStart' in funcList:
             pos=funcList['funcStart']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
@@ -49,7 +52,7 @@ class scPveSelectSurprise(myScene):
             if (func.name=='funcTag'):
                 bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                 if bFind:
-                    pos1=[[-210,180],[10,180],[230,180]]
-                    pos=pos1[random.randint(0,2)]
+                    rand=[[-210,180],[10,180],[230,180]]
+                    pos=rand[random.randint(0,2)]
                     moveAndClick(x+w/2+pos[0],y+h/2+pos[1])
                     return

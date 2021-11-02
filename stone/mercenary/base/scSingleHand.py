@@ -46,14 +46,12 @@ class scSingleHand(myScene):
         if 'func1' in funcList:
             pos=funcList['func1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func2' in funcList:
-            pyautogui.screenshot(str(time.strftime(
-                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+        elif 'func2' in funcList: #后续更改名称需要更合理，不用1/2/3等数字
+            SaveAwardPng()
             pos=funcList['func2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'func3' in funcList:
-            pyautogui.screenshot(str(time.strftime(
-                'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+            SaveAwardPng()
             pos=funcList['func3']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
         elif 'func4' in funcList:
@@ -68,8 +66,6 @@ class scSingleHand(myScene):
         elif 'funcRound' in funcList:
             pos=funcList['funcRound']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
-            MyGui.gRound+=1
-            MyGui.gRunTime=time.time()
         elif 'func8' in funcList:
             pos=funcList['func8']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
