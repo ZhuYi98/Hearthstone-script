@@ -83,6 +83,7 @@ class scPveFightIng(myScene):
                 pos=okList[0]
                 x=pos[0]+pos[2]/2
                 y=pos[1]+pos[3]/2
+                #增加一个右键按下弹起操作，消除卡顿时异常点击自己英雄的情况
                 moveAndClick(x+diffHero[0],y+diffHero[1])
                 continue
 
@@ -95,6 +96,7 @@ class scPveFightIng(myScene):
             if bFind:
 
                 #特定数字，高效，需要根据自己界面调整
+                #需要修改为根据'当前技能'的偏移量来计算位置，不能使用绝对值，然后可以使用任何技能
                 xOri=843                #第一个技能x坐标
                 yOri=559                #第一个技能y坐标
                 diffHero=[-10,-50]      #第一个技能相对于英雄偏移量
