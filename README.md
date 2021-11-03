@@ -26,25 +26,24 @@
 10. 小关卡战斗结束（多点击几次，直到结束）
 11. 小关卡宝藏选择，之后跳转到8（宝藏随机选择，尽量避免不利宝藏）
 12. 2轮小战斗结束或者继续
-13. 大关卡战斗结束奖励，之后跳转到6（多点击几次，直到结束）
+13. 大关卡战斗结束奖励，完成开箱子
+14. 之后跳转到6（多点击几次，直到结束）
 
 备注：每完成一轮战斗，记录时间、标志、其他数据等进行展示
-检测到一定时间内未完成，重启炉石和战网，循环1-13
+检测到一定时间内未完成，重启炉石和战网，循环1-14
 
 #### 安装教程
 
 0. pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-
 1. pip install opencv-python
 2. pip install pillow
 3. pip install pyautogui
-4. pip install win32gui
+4. pip install win32gui （Python3.10等高级版本不需要安装，已经内置） 
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 环境安装完成后，直接运行stoneMain.py即可
+2. 可以根据自己的需求调试相关功能，打开对应开关即可
 
 #### 参与贡献
 
