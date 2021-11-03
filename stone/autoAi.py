@@ -98,7 +98,7 @@ class AutoAi(object):
             self.enableScene('PveSelectLevel')
             self.enableScene('PveFightChoose')
             self.enableScene('PveFightIng')
-            #self.enableScene('PveFightQuit')
+            self.enableScene('PveFightQuit')
             self.enableScene('PveSelectTreasury')
             self.enableScene('PveSelectSurprise')
             self.enableScene('FightBox')

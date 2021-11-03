@@ -69,12 +69,13 @@ class scPveFightChoose(myScene):
     def proc(self,background):
 
         #N轮放弃
-        if 0:
-            funcList1={}
-            if 'funcTeamView' in funcList1:
-                pos=funcList1['funcTeamView']
-                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-                return
+        if MyGui.gRound>=MyGui.gSurrender:
+            for func in self.funcPng:
+                if (func.name=='funcTeamView'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+                    if bFind:
+                        moveAndClick(x+w/2,y+h/2)
+            return
 
         #寻找开始按钮
         funcList2={}

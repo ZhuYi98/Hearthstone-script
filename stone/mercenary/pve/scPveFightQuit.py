@@ -31,7 +31,7 @@ class scPveFightQuit(myScene):
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcInsure' in funcList:
             pos=funcList['funcInsure']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3)
             MyGui.gFinish+=1
         elif 'funcQuit' in funcList:
             pos=funcList['funcQuit']

@@ -126,6 +126,8 @@ class MyGui(object):
     gLevel='S2-5'
     gCard='1-1'
 
+    gSurrender=999
+
     def __init__(self):
 
         #读取配置文件
