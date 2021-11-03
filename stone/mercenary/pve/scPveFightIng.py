@@ -10,7 +10,8 @@ class scPveFightIng(myScene):
     def __init__(self):
         self.bValid=False
         self.enemyPos=[0,0]
-        self.offset=[-500,-400]
+        self.offset=[-480,-320]
+        self.bLastSkill=False
         self.lastSkill=None
         self.name='PveFightIng'
         self.path='resource/mercenary/pve/scPveFightIng'
@@ -26,7 +27,7 @@ class scPveFightIng(myScene):
                 else:
                     if tag.name=='tag1':
                         self.enemyPos[0]=x+self.offset[0]
-                        self.enemyPos[1]=x+self.offset[1]
+                        self.enemyPos[1]=y+self.offset[1]
             return True
         else:
             return False
@@ -57,7 +58,7 @@ class scPveFightIng(myScene):
                 if (func.name=='funcOk'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
-                        self.lastSkill=None
+                        self.bLastSkill=False
                         moveAndClick(x+w/2,y+h/2,10) #战斗至少需要10秒
                         return
 
@@ -95,7 +96,7 @@ class scPveFightIng(myScene):
                 pos=okList[0]
                 x=pos[0]+pos[2]/2
                 y=pos[1]+pos[3]/2
-                #增加一个右键按下弹起操作，消除卡顿时异常点击自己英雄的情况
+                self.bLastSkill=False
                 Click(x+diffHero[0],y+diffHero[1],b='right')
                 moveAndClick(x+diffHero[0],y+diffHero[1])
                 continue
@@ -107,23 +108,10 @@ class scPveFightIng(myScene):
                     break
             bFind,okList=bFindMultInBackground(background,func,0.70)
             if bFind:
-                
-                '''
-                随机技能:
-                1、全局变量drag=None
-                2、判断到drag==None，说明释放新技能
-                    2.1随机选择一个技能
-                    2.2drag=当前技能图标，然后拖动，continue
-                3、判断到drag!=None，说明上次有拖动过，将drag图标在全局背景中查找，
-                    3.1查找到，说明drag是非指向性技能，进行点击操作，continue
-                    3.2未查到，说明drag是指向性技能，已经释放成功，然后重置drag==None，循环
-                4、循环直到所有技能释放完毕
-                5、技能都释放完毕，重置drag=None
-                '''
 
                 #释放新技能
                 bSkill=False
-                if self.lastSkill==None:
+                if not self.bLastSkill:
                     bSkill=True
                 else:
                     #判断上次技能是否拖动成功
@@ -139,11 +127,14 @@ class scPveFightIng(myScene):
                 if bSkill:
                     okList.sort()
                     #pos=okList[random.randint(0,len(okList)-1)]#技能随机
-                    pos=okList[len(okList)-1] #技能优先4,3,2,1
-                    diffHero=[-10,-50]  #技能相对于英雄偏移量
+                    #pos=okList[len(okList)-1] #技能优先4,3,2,1
+                    pos=okList[0]#默认使用1技能
+                    diffHero=[-20,-50]  #技能相对于英雄偏移量
+                    diffSkill=[-35,-25] #技能相对于英雄偏移量
                     x=pos[0]+pos[2]/2+diffHero[0]
                     y=pos[1]+pos[3]/2+diffHero[1]
-                    self.lastSkill=SaveCutPng(x-40,y-40,100,100)
+                    self.bLastSkill=True
+                    self.lastSkill=SaveCutPng(x+diffSkill[0],y+diffSkill[1],50,50)
                     Drag(x,y,self.enemyPos[0],self.enemyPos[1],1.5)
                     continue
  

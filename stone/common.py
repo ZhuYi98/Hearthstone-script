@@ -44,7 +44,7 @@ def Drag(x0,y0,x1,y1,t=1.5):
 
 def SaveCutPng(x,y,w,h):
     pyautogui.screenshot("resource/cut.png",region=(x,y,w,h))
-    return cv2.imread("resource/cut.png",cv2.IMREAD_GRAYSCALE)
+    return myPng('resource','cut.png')
 
 def SaveScreen():
     pyautogui.screenshot("resource/background.png")
