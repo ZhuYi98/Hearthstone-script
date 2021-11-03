@@ -31,6 +31,7 @@ class scSingleHand(myScene):
                ('tag5' in tagList) or \
                ('tag6' in tagList) or \
                ('tag7' in tagList) or \
+               ('tag8' in tagList) or \
                ('tagRound' in tagList):
                 return True
             else:
@@ -39,35 +40,34 @@ class scSingleHand(myScene):
             return False
 
     def proc(self,background):
-        funcList={}
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.85)
             if bFind:
-                funcList[func.name]=(x,y,w,h)
-                break
-        if 'func1' in funcList:
-            pos=funcList['func1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func2' in funcList: #后续更改名称需要更合理，不用1/2/3等数字
-            SaveAwardPng()
-            pos=funcList['func2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func3' in funcList:
-            SaveAwardPng()
-            pos=funcList['func3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func4' in funcList:
-            pos=funcList['func4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
-        elif 'func5' in funcList:
-            pos=funcList['func5']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func6' in funcList:
-            pos=funcList['func6']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'func7' in funcList:
-            pos=funcList['func7']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-        elif 'funcRound' in funcList:
-            pos=funcList['funcRound']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+                #后续更改名称需要更合理，不用1/2/3等数字
+                if func.name=='funcRound':
+                    moveAndClick(x+w/2,y+h/2,5)
+                    break
+                elif func.name=='func1':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func2':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func3':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func4':
+                    moveAndClick(x+w/2,y+h/2,5)
+                    break
+                elif func.name=='func6':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func7':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func8':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='func5':
+                    moveAndClick(x+w/2,y+h/2)
+                    break

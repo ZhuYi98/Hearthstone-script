@@ -62,18 +62,36 @@ class scPveFightIng(myScene):
                         moveAndClick(x+w/2,y+h/2,10) #战斗至少需要10秒
                         return
 
-            #寻找AOE技能，可以都提前固定好
+            #寻找第一轮就能释放的AOE技能，可以都提前固定好
             bFindAoe=False
             for func in self.funcPng:
-                if (func.name=='funcSkill1') or \
-                    (func.name=='funcSkill2') or \
-                    (func.name=='funcSkill3') or \
-                    (func.name=='funcSkill4') or \
-                    (func.name=='funcSkill5') or \
-                    (func.name=='funcSkill6') or \
-                    (func.name=='funcSkill7') or \
-                    (func.name=='funcSkill8') or \
-                    (func.name=='funcSkill9'):
+                if (func.name=='funcAoe1') or \
+                    (func.name=='funcAoe2') or \
+                    (func.name=='funcAoe3') or \
+                    (func.name=='funcAoe4') or \
+                    (func.name=='funcAoe5') or \
+                    (func.name=='funcAoe6'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                    if bFind:
+                        bFindAoe=True
+                        moveAndClick(x+w/2,y+h/2)
+                        break
+                    else:
+                        bFindAoe=False
+            if bFindAoe:continue
+
+            #寻找等待一回合的AOE技能，可以都提前固定好
+            for func in self.funcPng:
+                if (func.name=='funcAoeWait1') or \
+                    (func.name=='funcAoeWait2') or \
+                    (func.name=='funcAoeWait3') or \
+                    (func.name=='funcAoeWait4') or \
+                    (func.name=='funcAoeWait5') or \
+                    (func.name=='funcAoeWait6') or \
+                    (func.name=='funcAoeWait7') or \
+                    (func.name=='funcAoeWait8') or \
+                    (func.name=='funcAoeWait9') or \
+                    (func.name=='funcAoeWait10'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         bFindAoe=True
