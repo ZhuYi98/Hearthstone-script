@@ -11,7 +11,7 @@ class scSelectCard(myScene):
     def __init__(self):
         self.bValid=False
         self.firstPos=[0,0]
-        self.offset=[-110,110]
+        self.offset=[-190,95]
         self.cardGroup=[190,110]
         self.name='SelectCard'
         self.path='resource/mercenary/base/scSelectCard'
@@ -39,6 +39,9 @@ class scSelectCard(myScene):
     def proc(self,background):
 
         #选择卡组
+        oriPos=[[[0,0],[0,0],[0,0]],
+                [[0,0],[0,0],[0,0]],
+                [[0,0],[0,0],[0,0]]]
         for i in range(3):
             for j in range(3):
                 oriPos[i][j][0]=self.firstPos[0]+self.cardGroup[0]*(j%3)+self.cardGroup[0]/2
