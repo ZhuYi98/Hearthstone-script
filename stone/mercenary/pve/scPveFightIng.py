@@ -44,8 +44,9 @@ class scPveFightIng(myScene):
             #准备自动上英雄
             for func in self.funcPng:
                 if (func.name=='funcHeroNone1') or \
-                    (func.name=='funcHeroNone2'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                    (func.name=='funcHeroNone2') or \
+                    (func.name=='funcHeroNone3'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.75)
                     if bFind:
                         moveAndClick(x+w/2,y+h/2,12)
                         return
