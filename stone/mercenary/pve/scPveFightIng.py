@@ -9,6 +9,9 @@ from openCv import *
 class scPveFightIng(myScene):
     def __init__(self):
         self.bValid=False
+        self.enemyPos=[0,0]
+        self.offset=[-500,-400]
+        self.lastSkill=None
         self.name='PveFightIng'
         self.path='resource/mercenary/pve/scPveFightIng'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
@@ -18,7 +21,12 @@ class scPveFightIng(myScene):
         if self.bValid:
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
-                if not bFind:return False
+                if not bFind:
+                    return False
+                else:
+                    if tag.name=='tag1':
+                        self.enemyPos[0]=x+self.offset[0]
+                        self.enemyPos[1]=x+self.offset[1]
             return True
         else:
             return False
@@ -41,11 +49,15 @@ class scPveFightIng(myScene):
                         moveAndClick(x+w/2,y+h/2,12)
                         return
 
+            #特殊情况，对面全部隐身，直接点结束，后续看看怎么实现
+            #...
+
             #是否技能全部释放完毕
             for func in self.funcPng:
                 if (func.name=='funcOk'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
+                        self.lastSkill=None
                         moveAndClick(x+w/2,y+h/2,10) #战斗至少需要10秒
                         return
 
@@ -84,6 +96,7 @@ class scPveFightIng(myScene):
                 x=pos[0]+pos[2]/2
                 y=pos[1]+pos[3]/2
                 #增加一个右键按下弹起操作，消除卡顿时异常点击自己英雄的情况
+                Click(x+diffHero[0],y+diffHero[1],b='right')
                 moveAndClick(x+diffHero[0],y+diffHero[1])
                 continue
 
@@ -94,36 +107,43 @@ class scPveFightIng(myScene):
                     break
             bFind,okList=bFindMultInBackground(background,func,0.70)
             if bFind:
-
-                #特定数字，高效，需要根据自己界面调整
-                #需要修改为根据'当前技能'的偏移量来计算位置，不能使用绝对值，然后可以使用任何技能
-                xOri=843                #第一个技能x坐标
-                yOri=559                #第一个技能y坐标
-                diffHero=[-10,-50]      #第一个技能相对于英雄偏移量
-                diffEnemy=[100,-180]    #第一个技能相对于敌人偏移量
-                Drag(xOri+diffHero[0],yOri+diffHero[1],xOri+diffEnemy[0],yOri+diffEnemy[1],1.5)
-                continue
-
+                
                 '''
-                随机技能待调试:
+                随机技能:
                 1、全局变量drag=None
-                2、判断到drag==None，说明第一次释放技能
+                2、判断到drag==None，说明释放新技能
                     2.1随机选择一个技能
                     2.2drag=当前技能图标，然后拖动，continue
                 3、判断到drag!=None，说明上次有拖动过，将drag图标在全局背景中查找，
                     3.1查找到，说明drag是非指向性技能，进行点击操作，continue
-                    3.2未查到，说明drag是指向性技能，已经释放成功，然后
-                        3.1.1随机选择一个技能
-                        3.1.2drag=当前技能图标，然后拖动，continue
+                    3.2未查到，说明drag是指向性技能，已经释放成功，然后重置drag==None，循环
                 4、循环直到所有技能释放完毕
                 5、技能都释放完毕，重置drag=None
                 '''
-                if 0:
+
+                #释放新技能
+                bSkill=False
+                if self.lastSkill==None:
+                    bSkill=True
+                else:
+                    #判断上次技能是否拖动成功
+                    bFind,x,y,w,h=bFindInBackground(background,self.lastSkill,0.80)
+                    if bFind:
+                        #拖动失败，说明为非指向性技能，需要单击
+                        moveAndClick(x+40,y+40)
+                    else:
+                        #拖动成功，需要释放技能
+                        bSkill=True
+
+                #随机释放技能
+                if bSkill:
                     okList.sort()
-                    pos=okList[random.randint(0,len(okList)-1)] 
-                    #pos=okList[0]
-                    x=pos[0]+pos[2]/2
-                    y=pos[1]+pos[3]/2
-                    #moveAndClick(xOri+diff1[0],yOri+diff1[1])
+                    #pos=okList[random.randint(0,len(okList)-1)]#技能随机
+                    pos=okList[len(okList)-1] #技能优先4,3,2,1
+                    diffHero=[-10,-50]  #技能相对于英雄偏移量
+                    x=pos[0]+pos[2]/2+diffHero[0]
+                    y=pos[1]+pos[3]/2+diffHero[1]
+                    self.lastSkill=SaveCutPng(x-40,y-40,100,100)
+                    Drag(x,y,self.enemyPos[0],self.enemyPos[1],1.5)
+                    continue
  
-                    

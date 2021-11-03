@@ -23,11 +23,11 @@ def moveAndClick(x,y,t=1.5):
         pyautogui.moveTo(10,10)
         time.sleep(t)
 
-def Click(x,y,t=0):
+def Click(x,y,b='left',t=0):
     if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
-        pyautogui.moveTo(x,y)
-        pyautogui.mouseDown(x,y)
-        pyautogui.mouseUp(x,y)
+        pyautogui.mouseDown(x,y,button=b)
+        time.sleep(0.1)
+        pyautogui.mouseUp(x,y,button=b)
         time.sleep(t)
 
 def Drag(x0,y0,x1,y1,t=1.5):
@@ -41,6 +41,10 @@ def Drag(x0,y0,x1,y1,t=1.5):
         pyautogui.mouseUp(x1,y1)
         pyautogui.moveTo(10,10,)
         time.sleep(t)
+
+def SaveCutPng(x,y,w,h):
+    pyautogui.screenshot("resource/cut.png",region=(x,y,w,h))
+    return cv2.imread("resource/cut.png",cv2.IMREAD_GRAYSCALE)
 
 def SaveScreen():
     pyautogui.screenshot("resource/background.png")

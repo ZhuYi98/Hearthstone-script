@@ -10,11 +10,14 @@ from myGui import *
 class scSelectCard(myScene):
     def __init__(self):
         self.bValid=False
+        self.firstPos=[0,0]
+        self.offset=[-110,110]
+        self.cardGroup=[190,110]
         self.name='SelectCard'
         self.path='resource/mercenary/base/scSelectCard'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
         self.funcPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('func')]
-    
+
     def isOwn(self,background):
         if self.bValid:
             tagList={}
@@ -22,6 +25,8 @@ class scSelectCard(myScene):
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
+                    self.firstPos[0]=x+self.offset[0]
+                    self.firstPos[1]=y+self.offset[1]
                     break
             if ('tag1' in tagList) or \
                ('tag2' in tagList):
@@ -33,11 +38,11 @@ class scSelectCard(myScene):
 
     def proc(self,background):
 
-        #需要修改为根据'选择一名英雄'的偏移量来计算卡组位置，不能使用绝对值
         #选择卡组
-        oriPos=[[[645,395],[835,395],[1025,395]],
-                [[645,505],[835,505],[1025,505]],
-                [[645,615],[835,615],[1025,615]]]
+        for i in range(3):
+            for j in range(3):
+                oriPos[i][j][0]=self.firstPos[0]+self.cardGroup[0]*(j%3)+self.cardGroup[0]/2
+                oriPos[i][j][1]=self.firstPos[1]+self.cardGroup[1]*(i%3)+self.cardGroup[1]/2
         card=MyGui.gCard.replace('\n','').split('-')
         pos=oriPos[int(card[0])-1][int(card[1])-1]
         moveAndClick(pos[0],pos[1])
