@@ -42,9 +42,9 @@ def Drag(x0,y0,x1,y1,t=1.5):
         pyautogui.moveTo(10,10,)
         time.sleep(t)
 
-def SaveCutPng(x,y,w,h):
-    pyautogui.screenshot("resource/cut.png",region=(x,y,w,h))
-    return myPng('resource','cut.png')
+def SaveLastSkillPng(x,y,w,h):
+    pyautogui.screenshot("resource/lastSkill.png",region=(x,y,w,h))
+    return myPng('resource','lastSkill.png')
 
 def SaveScreen():
     pyautogui.screenshot("resource/background.png")

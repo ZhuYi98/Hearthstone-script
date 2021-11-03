@@ -147,12 +147,12 @@ class scPveFightIng(myScene):
                     #pos=okList[random.randint(0,len(okList)-1)]#技能随机
                     #pos=okList[len(okList)-1] #技能优先4,3,2,1
                     pos=okList[0]#默认使用1技能
-                    diffHero=[-20,-50]  #技能相对于英雄偏移量
-                    diffSkill=[-35,-25] #技能相对于英雄偏移量
+                    diffHero=[-15,-50]
+                    diffSkill=[-30,-25]
                     x=pos[0]+pos[2]/2+diffHero[0]
                     y=pos[1]+pos[3]/2+diffHero[1]
                     self.bLastSkill=True
-                    self.lastSkill=SaveCutPng(x+diffSkill[0],y+diffSkill[1],50,50)
+                    self.lastSkill=SaveLastSkillPng(x+diffSkill[0],y+diffSkill[1],50,50)
                     Drag(x,y,self.enemyPos[0],self.enemyPos[1],1.5)
                     continue
  
