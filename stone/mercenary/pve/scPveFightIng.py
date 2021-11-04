@@ -177,6 +177,8 @@ class scPveFightIng(myScene):
                         pos=okList[3]
                     elif MyGui.gSkill=='11' and cnt>=5:
                         pos=okList[4]
+                    elif MyGui.gSkill=='6':
+                        pos=okList[random.randint(0,len(okList)-1)]
                     elif MyGui.gSkill=='12':
                         pos=okList[random.randint(0,len(okList)-1)]
                     diffHero=[-15,-50]
