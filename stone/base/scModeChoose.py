@@ -16,10 +16,15 @@ class scModeChoose(myScene):
     
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
-                if not bFind:return False
-            return True
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagStone' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 

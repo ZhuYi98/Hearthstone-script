@@ -17,19 +17,24 @@ class scPveFightFinish(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
-                if not bFind:return False
-            return True
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagFinish' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcFinish' in funcList:
             pos=funcList['funcFinish']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
             MyGui.gFinish+=1

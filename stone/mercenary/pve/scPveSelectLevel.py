@@ -16,10 +16,15 @@ class scPveSelectLevel(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.88)
-                if not bFind:return False
-            return True
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.85)
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagReward' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 

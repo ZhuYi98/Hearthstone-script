@@ -16,10 +16,15 @@ class scPveSelectSurprise(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
-                if not bFind:return False
-            return True
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagVisit' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -42,14 +47,10 @@ class scPveSelectSurprise(myScene):
             pos=funcList['funcHero1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
             return
-        elif 'funcHero2' in funcList:
-            pos=funcList['funcHero2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
-            return
 
         #寻找随机碎片
         for func in self.funcPng:
-            if (func.name=='funcTag'):
+            if (func.name=='funcVisit'):
                 bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                 if bFind:
                     rand=[[-210,180],[10,180],[230,180]]

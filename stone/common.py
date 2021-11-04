@@ -51,12 +51,14 @@ def SaveScreen():
     return cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
 
 def SaveAwardPng():
-    pyautogui.screenshot(str(time.strftime(
-        'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+    if MyGui.bSavePng:
+        pyautogui.screenshot(str(time.strftime(
+            'config/box/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
 
 def SaveErrorPng():
-    pyautogui.screenshot(str(time.strftime(
-        'config/error/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
+    if MyGui.bSavePng:
+        pyautogui.screenshot(str(time.strftime(
+            'config/error/%Y-%m-%d_%H-%M-%S.png',time.localtime(time.time()))))
 
 class MyLog(object):
     def __init__(self):
@@ -83,7 +85,7 @@ class myScene(object):
         self.path=''
         self.tagPng=[myPng('','')]
         self.funcPng=[myPng('','')]
-    
+
     def enable(self):
         self.bValid=True
 

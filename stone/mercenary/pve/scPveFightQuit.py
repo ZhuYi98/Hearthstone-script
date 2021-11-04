@@ -17,17 +17,22 @@ class scPveFightQuit(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
-                if not bFind:return False
-            return True
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
+                if bFind:tagList[tag.name]=(x,y,w,h)
+            if ('tagGroup' in tagList) and \
+               ('tagQuit' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 
     def proc(self,background):
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
         if 'funcInsure' in funcList:
             pos=funcList['funcInsure']

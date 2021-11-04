@@ -16,10 +16,15 @@ class scPveSelectTreasury(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
-                if not bFind:return False
-            return True
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagTreasury' in tagList):
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -28,8 +33,8 @@ class scPveSelectTreasury(myScene):
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.90)
             if bFind:funcList[func.name]=(x,y,w,h)
-        if 'funcDis' in funcList and 'funcTreasury' in funcList:
-            pos=funcList['funcTreasury']
+        if 'funcDis' in funcList and 'funcArrow' in funcList:
+            pos=funcList['funcArrow']
             rand=[150,360,570]
             moveAndClick(pos[0]+pos[2]/2+rand[random.randint(0,2)],pos[1]+pos[3]/2,0)
             return
@@ -45,7 +50,7 @@ class scPveSelectTreasury(myScene):
                     pos=funcList['funcHold']
                     moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
                 MyGui.gRound+=1
-            elif 'funcTreasury' in funcList:
-                pos=funcList['funcTreasury']
+            elif 'funcArrow' in funcList:
+                pos=funcList['funcArrow']
                 rand=[150,360,570]
                 moveAndClick(pos[0]+pos[2]/2+rand[random.randint(0,2)],pos[1]+pos[3]/2,0)

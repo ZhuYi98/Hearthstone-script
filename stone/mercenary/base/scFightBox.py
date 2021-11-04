@@ -18,17 +18,17 @@ class scFightBox(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.75)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.70)
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
                     break
-            if ('tag1' in tagList) or \
-               ('tag2' in tagList) or \
-               ('tag3' in tagList) or \
-               ('tag4' in tagList) or \
-               ('tag5' in tagList) or \
-               ('tag6' in tagList) or \
-               ('tag7' in tagList):
+            if ('tagBox1' in tagList) or \
+               ('tagBox2' in tagList) or \
+               ('tagBox3' in tagList) or \
+               ('tagBox4' in tagList) or \
+               ('tagBox5' in tagList) or \
+               ('tagPass1' in tagList) or \
+               ('tagPass2' in tagList):
                 return True
             else:
                 return False
@@ -36,30 +36,40 @@ class scFightBox(myScene):
             return False
 
     def proc(self,background):
+        allList=[]
         funcList={}
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.75)
-            if bFind:funcList[func.name]=(x,y,w,h)
+            bFind,okList=bFindMultInBackground(background,func,0.70)
+            if bFind:funcList[func.name]=okList
         if 'funcPass1' in funcList:
             SaveAwardPng()
             pos=funcList['funcPass1']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
-        if 'funcPass2' in funcList:
+            return
+        elif 'funcPass2' in funcList:
             SaveAwardPng()
             pos=funcList['funcPass2']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+            return
         if 'funcBox1' in funcList:
-            pos=funcList['funcBox1']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
+            posList=funcList['funcBox1']
+            for pos in posList:
+                allList.append(pos)
         if 'funcBox2' in funcList:
-            pos=funcList['funcBox2']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
+            posList=funcList['funcBox2']
+            for pos in posList:
+                allList.append(pos)
         if 'funcBox3' in funcList:
-            pos=funcList['funcBox3']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
+            posList=funcList['funcBox3']
+            for pos in posList:
+                allList.append(pos)
         if 'funcBox4' in funcList:
-            pos=funcList['funcBox4']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
+            posList=funcList['funcBox4']
+            for pos in posList:
+                allList.append(pos)
         if 'funcBox5' in funcList:
-            pos=funcList['funcBox5']
+            posList=funcList['funcBox5']
+            for pos in posList:
+                allList.append(pos)
+        for pos in allList:
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)

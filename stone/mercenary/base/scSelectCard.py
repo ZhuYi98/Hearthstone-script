@@ -28,8 +28,8 @@ class scSelectCard(myScene):
                     self.firstPos[0]=x+self.offset[0]
                     self.firstPos[1]=y+self.offset[1]
                     break
-            if ('tag1' in tagList) or \
-               ('tag2' in tagList):
+            if ('tagPve' in tagList) or \
+               ('tagPvp' in tagList):
                 return True
             else:
                 return False

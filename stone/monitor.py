@@ -69,7 +69,7 @@ class Monitor(object):
                             self.killProcess(self.processBattleExe)
                     else:
                         self.startProcess(MyGui.gBattlePath)
-                        MyGui.gReboot=1
+                        MyGui.bResetScene=True
                         MyGui.gRunTime=time.time()
                     MyGui.gContinue=int(time.time()-MyGui.gRunTime)
                     if MyGui.gContinue>MyGui.gInterval:
@@ -80,7 +80,7 @@ class Monitor(object):
                             self.killProcess(self.processStoneExe)
                         time.sleep(2)
                         self.startProcess(MyGui.gBattlePath)
-                        MyGui.gReboot=1
+                        MyGui.bResetScene=True
                         MyGui.gRebootCnt+=1
                         MyGui.gRunTime=time.time()
                 else:
@@ -93,7 +93,7 @@ class Monitor(object):
                         '-'+MyGui.gEndTime.replace('\n','')+')'
             else:
                 MyGui.bAutoAi=False
-                MyGui.gLog='软件暂未运行'
+                MyGui.gLog='软件暂未运行，请点击蓝色"运行"按钮'
 
 def threadMonitor():
     monitor=Monitor()

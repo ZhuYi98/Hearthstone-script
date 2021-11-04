@@ -21,15 +21,17 @@ class scPveFightIng(myScene):
 
     def isOwn(self,background):
         if self.bValid:
+            tagList={}
             for tag in self.tagPng:
                 bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
-                if not bFind:
-                    return False
-                else:
-                    if tag.name=='tag1':
-                        self.enemyPos[0]=x+self.offset[0]
-                        self.enemyPos[1]=y+self.offset[1]
-            return True
+                if bFind:
+                    tagList[tag.name]=(x,y,w,h)
+            if ('tagSkull' in tagList):
+                self.enemyPos[0]=x+self.offset[0]
+                self.enemyPos[1]=y+self.offset[1]
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -78,7 +80,8 @@ class scPveFightIng(myScene):
                     (func.name=='funcAoe3') or \
                     (func.name=='funcAoe4') or \
                     (func.name=='funcAoe5') or \
-                    (func.name=='funcAoe6'):
+                    (func.name=='funcAoe6') or \
+                    (func.name=='funcAoe7'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         bFindAoe=True
@@ -141,10 +144,10 @@ class scPveFightIng(myScene):
                     bSkill=True
                 else:
                     #判断上次技能是否拖动成功
-                    bFind,x,y,w,h=bFindInBackground(background,self.lastSkill,0.80)
+                    bFind,x,y,w,h=bFindInBackground(background,self.lastSkill,0.90)
                     if bFind:
                         #拖动失败，说明为非指向性技能，需要单击
-                        moveAndClick(x+40,y+40)
+                        moveAndClick(x+23,y+23)
                     else:
                         #拖动成功，需要释放技能
                         bSkill=True
@@ -156,11 +159,11 @@ class scPveFightIng(myScene):
                     #pos=okList[len(okList)-1] #技能优先4,3,2,1
                     pos=okList[0]#默认使用1技能
                     diffHero=[-15,-50]
-                    diffSkill=[-30,-25]
+                    diffSkill=[-25,-20]
                     x=pos[0]+pos[2]/2+diffHero[0]
                     y=pos[1]+pos[3]/2+diffHero[1]
                     self.bLastSkill=True
-                    self.lastSkill=SaveLastSkillPng(x+diffSkill[0],y+diffSkill[1],50,50)
+                    self.lastSkill=SaveLastSkillPng(x+diffSkill[0],y+diffSkill[1],46,46)
                     Drag(x,y,self.enemyPos[0],self.enemyPos[1],1.5)
                     continue
  

@@ -18,10 +18,10 @@ class scPveFightChoose(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.95)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if bFind:tagList[tag.name]=(x,y,w,h)
-            if (('tag1' in tagList) or ('tag11' in tagList)) and \
-               ('tag2' in tagList):
+            if (('tagSimple' in tagList) or ('tagHard' in tagList)) and \
+               ('tagBack' in tagList) and ('tagVictory' not in tagList):
                 return True
             else:
                 return False
@@ -29,8 +29,7 @@ class scPveFightChoose(myScene):
             return False
 
     def bValidButton(self):
-        pyautogui.screenshot('resource/background.png')
-        background=cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
+        background=SaveScreen()
         funcList={}
         for func in self.funcPng:
              if (func.name=='funcStartInter') or \
@@ -38,18 +37,18 @@ class scPveFightChoose(myScene):
                 (func.name=='funcStartShow') or \
                 (func.name=='funcStartGet') or \
                 (func.name=='funcStartSkip'):
-                bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+                bFind,x,y,w,h=bFindInBackground(background,func,0.90)
                 if bFind:
                     funcList[func.name]=(x,y,w,h)
                     break
         if 'funcStartInter' in funcList:
             pos=funcList['funcStartInter']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,15)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,10)
             MyGui.gRunTime=time.time()
             return True
         elif 'funcStartGoto' in funcList:
             pos=funcList['funcStartGoto']
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,8)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
             return True
         elif 'funcStartShow' in funcList:
             pos=funcList['funcStartShow']
@@ -69,10 +68,10 @@ class scPveFightChoose(myScene):
     def proc(self,background):
 
         #N轮放弃
-        if MyGui.gRound>=MyGui.gSurrender:
+        if MyGui.gRound>=MyGui.gAbandonCnt:
             for func in self.funcPng:
                 if (func.name=='funcTeamView'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.95)
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.90)
                     if bFind:
                         moveAndClick(x+w/2,y+h/2)
             return
@@ -167,6 +166,6 @@ class scPveFightChoose(myScene):
                 pos[3]+=100
                 allList.append(pos)
         for pos in allList:
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
             if self.bValidButton():
                 return

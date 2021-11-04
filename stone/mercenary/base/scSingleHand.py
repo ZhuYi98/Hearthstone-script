@@ -24,15 +24,14 @@ class scSingleHand(myScene):
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
                     break
-            if ('tag1' in tagList) or \
-               ('tag2' in tagList) or \
-               ('tag3' in tagList) or \
-               ('tag4' in tagList) or \
-               ('tag5' in tagList) or \
-               ('tag6' in tagList) or \
-               ('tag7' in tagList) or \
-               ('tag8' in tagList) or \
-               ('tagRound' in tagList):
+            if ('tagRound' in tagList) or \
+               ('tagBuff' in tagList) or \
+               ('tagNewTask' in tagList) or \
+               ('tagAward1' in tagList) or \
+               ('tagAward2' in tagList) or \
+               ('tagHeroUp' in tagList) or \
+               ('tagNewSkill' in tagList) or \
+               ('tagBox' in tagList):
                 return True
             else:
                 return False
@@ -43,31 +42,28 @@ class scSingleHand(myScene):
         for func in self.funcPng:
             bFind,x,y,w,h=bFindInBackground(background,func,0.80)
             if bFind:
-                #后续更改名称需要更合理，不用1/2/3等数字
                 if func.name=='funcRound':
                     moveAndClick(x+w/2,y+h/2,5)
                     break
-                elif func.name=='func1':
+                elif func.name=='funcBuff':
+                    moveAndClick(x+w/2,y+h/2,4)
+                    break
+                elif func.name=='funcNewTask':
+                    SaveAwardPng()
                     moveAndClick(x+w/2,y+h/2)
                     break
-                elif func.name=='func2':
-                    moveAndClick(x+w/2,y+h/2)
-                    break
-                elif func.name=='func3':
-                    moveAndClick(x+w/2,y+h/2)
-                    break
-                elif func.name=='func4':
+                elif func.name=='funcAward1':
                     moveAndClick(x+w/2,y+h/2,5)
                     break
-                elif func.name=='func6':
-                    moveAndClick(x+w/2,y+h/2)
+                elif func.name=='funcAward2':
+                    moveAndClick(x+w/2,y+h/2,5)
                     break
-                elif func.name=='func7':
-                    moveAndClick(x+w/2,y+h/2)
+                elif func.name=='funcHeroUp':
+                    moveAndClick(x+w/2,y+h/2,5)
                     break
-                elif func.name=='func8':
-                    moveAndClick(x+w/2,y+h/2)
+                elif func.name=='funcNewSkill':
+                    moveAndClick(x+w/2,y+h/2,5)
                     break
-                elif func.name=='func5':
+                elif func.name=='funcBox':
                     moveAndClick(x+w/2,y+h/2)
                     break

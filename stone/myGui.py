@@ -48,7 +48,9 @@ class Status(Frame):
         self._setStatus()
         self.timer=self.after(self.msec,self._update)
     def _setStatus(self):
-        status='通关次数='+str(MyGui.gFinish)+'  关卡='+str(MyGui.gRound)+\
+        status=\
+            '通关次数='+str(MyGui.gFinish)+\
+            '  小关='+str(MyGui.gRound)+'/'+str(MyGui.gAbandonCnt)+\
             '  战斗='+str(MyGui.gContinue)+'/'+str(MyGui.gInterval)+'秒'
         self.statusStr.set(status)
     def start(self):
@@ -103,30 +105,31 @@ class Wait(Frame):
 
 class MyGui(object):
 
+    bSavePng=False
+    gLog=None
+
     gRound=0
     gFinish=0
 
-    gReboot=1
+    bResetScene=False
     gContinue=0
     gInterval=300
     gRebootCnt=0
+    gWait=0.0
+
+    gMercenaryMode='pveMode'
 
     bAutoAi=False
     bRunning=False
     gRunTime=time.time()
 
-    gLog=None
-    gWait=0.0
-
     gBattlePath=None
-
     gStartTime=None
     gEndTime=None
 
     gLevel='S2-5'
     gCard='1-1'
-
-    gSurrender=999
+    gAbandonCnt=99
 
     def __init__(self):
 
@@ -233,6 +236,7 @@ class MyGui(object):
 
     def startAi(self):
         if self.btn2['text']=='运行':
+            MyGui.bResetScene=True
             MyGui.bRunning=True
             MyGui.gRunTime=time.time()
             self.btn2['foreground']='green'
