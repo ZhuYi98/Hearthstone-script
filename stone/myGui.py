@@ -128,6 +128,7 @@ class MyGui(object):
     gEndTime=None
 
     gLevel='S2-5'
+    gSkill='1'
     gCard='1-1'
     gAbandonCnt=99
 
@@ -137,13 +138,14 @@ class MyGui(object):
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         MyGui.gBattlePath=config.get('config','battlePath')
+        MyGui.gSkill=config.get('config','skill')
         MyGui.gCard=config.get('config','card')
         MyGui.gInterval=int(config.get('config','interval'))
         MyGui.gStartTime=config.get('config','startTime')
         MyGui.gEndTime=config.get('config','endTime')
 
         self.win=Tk()
-        self.win.title('炉石AI--By琴弦上的宇宙') #标题
+        self.win.title('炉石AI--By琴弦上的宇宙--2021-11-05') #标题
         self.win.attributes('-alpha',1.0) #透明度
         self.win.attributes('-topmost',True) #置顶
         self.win.geometry("420x310+0+360") #大小和位置
@@ -165,19 +167,28 @@ class MyGui(object):
         self.cmb1=ttk.Combobox(self.win)
         self.cmb1.place(x=120,y=40)
 
-        self.lb3=Label(self.win,text='战斗模式：',font=("",12))
+        self.lb3=Label(self.win,text='副本选择：',font=("",12))
         self.lb3.place(x=10,y=70)
         self.cmb2=ttk.Combobox(self.win)
         self.cmb2.place(x=120,y=70)
 
-        self.lb4=Label(self.win,text='游戏关卡：',font=("",12))
+        self.lb4=Label(self.win,text='技能选择：',font=("",12))
         self.lb4.place(x=10,y=100)
-        self.cmb3=ttk.Combobox(self.win)
+        self.cmb3=ttk.Combobox(self.win,width=10,font=("",10))
+        self.cmb3['values']=\
+            ['AOE后优先1','AOE后优先2','AOE后优先3','AOE后优先4','AOE后优先5','AOE后随机',\
+             '必优先1技能','必优先2技能','必优先3技能','必优先4技能','必优先5技能','全技能随机']
+        self.cmb3['state']='readonly'
+        skill=MyGui.gSkill.replace('\n','')
+        self.cmb3.current(int(skill)-1)
         self.cmb3.place(x=120,y=100)
+        self.btn55=Button(self.win,text='确定',width=5,height=1,\
+            font=("",12),command=self.setSkill)
+        self.btn55.place(x=230,y=97)
 
         self.lb5=Label(self.win,text='卡组选择：',font=("",12))
         self.lb5.place(x=10,y=130)
-        self.cmb4=ttk.Combobox(self.win,width=10,font=("",11))
+        self.cmb4=ttk.Combobox(self.win,width=10,font=("",10))
         self.cmb4['values']=\
             ['第1行第1个','第1行第2个','第1行第3个',\
              '第2行第1个','第2行第2个','第2行第3个',\
@@ -254,6 +265,34 @@ class MyGui(object):
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         config.set("config","battlePath",file)
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()
+
+    def setSkill(self):
+        i=0
+        all=['AOE后优先1','AOE后优先2','AOE后优先3','AOE后优先4','AOE后优先5','AOE后随机',\
+             '必优先1技能','必优先2技能','必优先3技能','必优先4技能','必优先5技能','全技能随机']
+        name1=self.cmb3.get()
+        for name in all:
+            if name1!=name:i+=1
+            else:
+                if i==0:MyGui.gSkill='1'
+                elif i==1:MyGui.gSkill='2'
+                elif i==2:MyGui.gSkill='3'
+                elif i==3:MyGui.gSkill='4'
+                elif i==4:MyGui.gSkill='5'
+                elif i==5:MyGui.gSkill='6'
+                elif i==6:MyGui.gSkill='7'
+                elif i==7:MyGui.gSkill='8'
+                elif i==8:MyGui.gSkill='9'
+                elif i==9:MyGui.gSkill='10'
+                elif i==10:MyGui.gSkill='11'
+                elif i==11:MyGui.gSkill='12'
+                break
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","skill",MyGui.gSkill.replace('\n',''))
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()

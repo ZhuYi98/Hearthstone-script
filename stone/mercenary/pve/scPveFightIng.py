@@ -74,43 +74,55 @@ class scPveFightIng(myScene):
 
             #寻找第一轮就能释放的AOE技能，可以都提前固定好
             bFindAoe=False
-            for func in self.funcPng:
-                if (func.name=='funcAoe1') or \
-                    (func.name=='funcAoe2') or \
-                    (func.name=='funcAoe3') or \
-                    (func.name=='funcAoe4') or \
-                    (func.name=='funcAoe5') or \
-                    (func.name=='funcAoe6') or \
-                    (func.name=='funcAoe7'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-                    if bFind:
-                        bFindAoe=True
-                        moveAndClick(x+w/2,y+h/2)
-                        break
-                    else:
-                        bFindAoe=False
-            if bFindAoe:continue
+            if (MyGui.gSkill=='1') or \
+                (MyGui.gSkill=='2') or \
+                (MyGui.gSkill=='3') or \
+                (MyGui.gSkill=='4') or \
+                (MyGui.gSkill=='5') or \
+                (MyGui.gSkill=='6'):
+                for func in self.funcPng:
+                    if (func.name=='funcAoe1') or \
+                        (func.name=='funcAoe2') or \
+                        (func.name=='funcAoe3') or \
+                        (func.name=='funcAoe4') or \
+                        (func.name=='funcAoe5') or \
+                        (func.name=='funcAoe6') or \
+                        (func.name=='funcAoe7'):
+                        bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                        if bFind:
+                            bFindAoe=True
+                            moveAndClick(x+w/2,y+h/2)
+                            break
+                        else:
+                            bFindAoe=False
+                if bFindAoe:continue
 
             #寻找等待一回合的AOE技能，可以都提前固定好
-            for func in self.funcPng:
-                if (func.name=='funcAoeWait1') or \
-                    (func.name=='funcAoeWait2') or \
-                    (func.name=='funcAoeWait3') or \
-                    (func.name=='funcAoeWait4') or \
-                    (func.name=='funcAoeWait5') or \
-                    (func.name=='funcAoeWait6') or \
-                    (func.name=='funcAoeWait7') or \
-                    (func.name=='funcAoeWait8') or \
-                    (func.name=='funcAoeWait9') or \
-                    (func.name=='funcAoeWait10'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-                    if bFind:
-                        bFindAoe=True
-                        moveAndClick(x+w/2,y+h/2)
-                        break
-                    else:
-                        bFindAoe=False
-            if bFindAoe:continue
+            if (MyGui.gSkill=='1') or \
+                (MyGui.gSkill=='2') or \
+                (MyGui.gSkill=='3') or \
+                (MyGui.gSkill=='4') or \
+                (MyGui.gSkill=='5') or \
+                (MyGui.gSkill=='6'):
+                for func in self.funcPng:
+                    if (func.name=='funcAoeWait1') or \
+                        (func.name=='funcAoeWait2') or \
+                        (func.name=='funcAoeWait3') or \
+                        (func.name=='funcAoeWait4') or \
+                        (func.name=='funcAoeWait5') or \
+                        (func.name=='funcAoeWait6') or \
+                        (func.name=='funcAoeWait7') or \
+                        (func.name=='funcAoeWait8') or \
+                        (func.name=='funcAoeWait9') or \
+                        (func.name=='funcAoeWait10'):
+                        bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                        if bFind:
+                            bFindAoe=True
+                            moveAndClick(x+w/2,y+h/2)
+                            break
+                        else:
+                            bFindAoe=False
+                if bFindAoe:continue
 
             #寻找未释放技能英雄（多图匹配）
             func=None
@@ -152,12 +164,21 @@ class scPveFightIng(myScene):
                         #拖动成功，需要释放技能
                         bSkill=True
 
-                #随机释放技能
+                #释放技能
                 if bSkill:
                     okList.sort()
-                    #pos=okList[random.randint(0,len(okList)-1)]#技能随机
-                    #pos=okList[len(okList)-1] #技能优先4,3,2,1
-                    pos=okList[0]#默认使用1技能
+                    cnt=len(okList)
+                    pos=okList[0]
+                    if MyGui.gSkill=='8' and cnt>=2:
+                        pos=okList[1]
+                    elif MyGui.gSkill=='9' and cnt>=3:
+                        pos=okList[2]
+                    elif MyGui.gSkill=='10' and cnt>=4:
+                        pos=okList[3]
+                    elif MyGui.gSkill=='11' and cnt>=5:
+                        pos=okList[4]
+                    elif MyGui.gSkill=='12':
+                        pos=okList[random.randint(0,len(okList)-1)]
                     diffHero=[-15,-50]
                     diffSkill=[-25,-20]
                     x=pos[0]+pos[2]/2+diffHero[0]
