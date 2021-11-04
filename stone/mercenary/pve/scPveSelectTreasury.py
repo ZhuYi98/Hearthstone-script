@@ -42,13 +42,13 @@ class scPveSelectTreasury(myScene):
             if 'funcSelOk' in funcList:
                 if 'funcGet' in funcList:
                     pos=funcList['funcGet']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3.5)
                 elif 'funcReplace' in funcList:
                     pos=funcList['funcReplace']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3.5)
                 elif 'funcHold' in funcList:
                     pos=funcList['funcHold']
-                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,5)
+                    moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,3.5)
                 MyGui.gRound+=1
             elif 'funcArrow' in funcList:
                 pos=funcList['funcArrow']
