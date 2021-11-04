@@ -20,7 +20,7 @@ class scSingleHand(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.85)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
                     break
@@ -41,7 +41,7 @@ class scSingleHand(myScene):
 
     def proc(self,background):
         for func in self.funcPng:
-            bFind,x,y,w,h=bFindInBackground(background,func,0.85)
+            bFind,x,y,w,h=bFindInBackground(background,func,0.80)
             if bFind:
                 #后续更改名称需要更合理，不用1/2/3等数字
                 if func.name=='funcRound':

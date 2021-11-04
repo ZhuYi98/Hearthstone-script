@@ -13,6 +13,7 @@ class scPveFightIng(myScene):
         self.offset=[-480,-320]
         self.bLastSkill=False
         self.lastSkill=None
+        self.endPos=[0,0]
         self.name='PveFightIng'
         self.path='resource/mercenary/pve/scPveFightIng'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
@@ -35,11 +36,17 @@ class scPveFightIng(myScene):
     def proc(self,background):
 
         #循环释放技能
+        runTime=time.time()
         while True:
 
             #重新截图判断
             background=SaveScreen()
             if not self.isOwn(background):return
+
+            #技能释放超时(对面有隐身、自己抉择技能等)，直接点结束
+            if ((time.time()-runTime)>30):
+                Click(self.endPos[0],self.endPos[1],b='right')
+                moveAndClick(self.endPos[0],self.endPos[1],10) #战斗至少需要10秒
 
             #准备自动上英雄
             for func in self.funcPng:
@@ -51,15 +58,14 @@ class scPveFightIng(myScene):
                         moveAndClick(x+w/2,y+h/2,12)
                         return
 
-            #特殊情况，对面全部隐身，直接点结束，后续看看怎么实现
-            #...
-
             #是否技能全部释放完毕
             for func in self.funcPng:
                 if (func.name=='funcOk'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         self.bLastSkill=False
+                        self.endPos[0]=x+w/2
+                        self.endPos[1]=y+h/2
                         moveAndClick(x+w/2,y+h/2,10) #战斗至少需要10秒
                         return
 
