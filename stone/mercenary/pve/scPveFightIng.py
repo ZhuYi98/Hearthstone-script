@@ -47,6 +47,7 @@ class scPveFightIng(myScene):
             if ((time.time()-runTime)>30):
                 Click(self.endPos[0],self.endPos[1],b='right')
                 moveAndClick(self.endPos[0],self.endPos[1],10) #战斗至少需要10秒
+                return
 
             #准备自动上英雄
             for func in self.funcPng:
