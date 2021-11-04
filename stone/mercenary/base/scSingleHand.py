@@ -26,7 +26,8 @@ class scSingleHand(myScene):
                     break
             if ('tagRound' in tagList) or \
                ('tagBuff' in tagList) or \
-               ('tagNewTask' in tagList) or \
+               ('tagNewTask1' in tagList) or \
+               ('tagNewTask2' in tagList) or \
                ('tagAward1' in tagList) or \
                ('tagAward2' in tagList) or \
                ('tagHeroUp' in tagList) or \
@@ -49,14 +50,18 @@ class scSingleHand(myScene):
                 elif func.name=='funcBuff':
                     moveAndClick(x+w/2,y+h/2,4)
                     break
-                elif func.name=='funcNewTask':
-                    SaveAwardPng()
+                elif func.name=='funcNewTask1':
+                    moveAndClick(x+w/2,y+h/2)
+                    break
+                elif func.name=='funcNewTask2':
                     moveAndClick(x+w/2,y+h/2)
                     break
                 elif func.name=='funcAward1':
+                    SaveAwardPng()
                     moveAndClick(x+w/2,y+h/2,5)
                     break
                 elif func.name=='funcAward2':
+                    SaveAwardPng()
                     moveAndClick(x+w/2,y+h/2,5)
                     break
                 elif func.name=='funcHeroUp':
