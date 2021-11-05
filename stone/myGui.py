@@ -113,36 +113,39 @@ class MyGui(object):
 
     bResetScene=False
     gContinue=0
-    gInterval=300
+    
     gRebootCnt=0
     gWait=0.0
-
-    gMercenaryMode='pveMode'
 
     bAutoAi=False
     bRunning=False
     gRunTime=time.time()
 
+    #界面配置
     gBattlePath=None
-    gStartTime=None
-    gEndTime=None
+    gGameMode='1'
 
     gLevel='S2-5'
+    gAbandonCnt=99
+
     gSkill='1'
     gCard='1-1'
-    gAbandonCnt=99
+    gInterval=600
+    gStartTime=None
+    gEndTime=None
 
     def __init__(self):
 
         #读取配置文件
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
-        MyGui.gBattlePath=config.get('config','battlePath')
+        MyGui.gBattlePath=config.get('config','battlepath')
+        MyGui.gGameMode=config.get('config','gamemode')
         MyGui.gSkill=config.get('config','skill')
         MyGui.gCard=config.get('config','card')
         MyGui.gInterval=int(config.get('config','interval'))
-        MyGui.gStartTime=config.get('config','startTime')
-        MyGui.gEndTime=config.get('config','endTime')
+        MyGui.gStartTime=config.get('config','starttime')
+        MyGui.gEndTime=config.get('config','endtime')
 
         self.win=Tk()
         self.win.title('炉石AI--By琴弦上的宇宙--2021-11-05') #标题
@@ -164,8 +167,15 @@ class MyGui(object):
 
         self.lb2=Label(self.win,text='游戏模式：',font=("",12))
         self.lb2.place(x=10,y=40)
-        self.cmb1=ttk.Combobox(self.win)
+        self.cmb1=ttk.Combobox(self.win,width=10,font=("",10))
+        self.cmb1['values']=['PVE','PVP']
+        self.cmb1['state']='readonly'
+        game=MyGui.gGameMode.replace('\n','')
+        self.cmb1.current(int(game)-1)
         self.cmb1.place(x=120,y=40)
+        self.btn555=Button(self.win,text='确定',width=5,height=1,\
+            font=("",12),command=self.setGameMode)
+        self.btn555.place(x=230,y=37)
 
         self.lb3=Label(self.win,text='副本选择：',font=("",12))
         self.lb3.place(x=10,y=70)
@@ -254,6 +264,7 @@ class MyGui(object):
             self.btn2['text']='运行中...'
         else:
             MyGui.bRunning=False
+            MyGui.bAutoAi=False
             self.btn2['foreground']='blue'
             self.btn2['text']='运行'
 
@@ -264,7 +275,24 @@ class MyGui(object):
         self.text1.insert(INSERT,file)
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
-        config.set("config","battlePath",file)
+        config.set("config","battlepath",file)
+        o=open("config/config.ini","w",encoding="utf8")
+        config.write(o)
+        o.close()
+    
+    def setGameMode(self):
+        i=0
+        all=['PVE','PVP']
+        name1=self.cmb1.get()
+        for name in all:
+            if name1!=name:i+=1
+            else:
+                if i==0:MyGui.gGameMode='1'
+                elif i==1:MyGui.gGameMode='2'
+                break
+        config=configparser.ConfigParser()
+        config.read("config/config.ini",encoding="utf8")
+        config.set("config","gamemode",MyGui.gGameMode.replace('\n',''))
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()
@@ -337,8 +365,8 @@ class MyGui(object):
         MyGui.gEndTime=self.text4.get(0.0,END)
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
-        config.set("config","startTime",MyGui.gStartTime.replace('\n',''))
-        config.set("config","endTime",MyGui.gEndTime.replace('\n',''))
+        config.set("config","starttime",MyGui.gStartTime.replace('\n',''))
+        config.set("config","endtime",MyGui.gEndTime.replace('\n',''))
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()

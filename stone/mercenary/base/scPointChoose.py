@@ -40,7 +40,7 @@ class scPointChoose(myScene):
     def proc(self,background):
 
         #判断当前佣兵模式
-        if MyGui.gMercenaryMode=='pveMode':
+        if MyGui.gGameMode=='1':
             moveAndClick(self.pvePos[0],self.pvePos[1])
-        elif MyGui.gMercenaryMode=='pvpMode':
+        elif MyGui.gGameMode=='2':
             moveAndClick(self.pvpPos[0],self.pvpPos[1],3)
