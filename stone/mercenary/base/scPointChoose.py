@@ -44,3 +44,5 @@ class scPointChoose(myScene):
             moveAndClick(self.pvePos[0],self.pvePos[1])
         elif MyGui.gGameMode=='2':
             moveAndClick(self.pvpPos[0],self.pvpPos[1],3)
+        elif MyGui.gGameMode=='3':
+            moveAndClick(self.pvpPos[0],self.pvpPos[1],3)

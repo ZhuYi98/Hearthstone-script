@@ -79,16 +79,9 @@ class AutoAi(object):
                 break
 
     def setMode(self,mode):
-        if mode=='modePvpSurrender':
-            self.enableScene('StoneStart')
-            self.enableScene('StoneInsure')
-            self.enableScene('ModeChoose')
-            self.enableScene('PointChoose')
-            self.enableScene('SelectCard')
-            self.enableScene('SingleHand')
-            self.enableScene('FightBox')
-            self.enableScene('PvpSurrender')
-        elif mode=='modePve':
+        for scene in self.allScene:
+            scene.dis()
+        if mode=='modePve':
             self.enableScene('StoneStart')
             self.enableScene('StoneInsure')
             self.enableScene('ModeChoose')
@@ -104,36 +97,55 @@ class AutoAi(object):
             self.enableScene('FightBox')
             self.enableScene('PveFightFinish')
             self.enableScene('SingleHand')
+        elif mode=='modePvpNormal':
+            self.enableScene('StoneStart')
+            self.enableScene('StoneInsure')
+            self.enableScene('ModeChoose')
+            self.enableScene('PointChoose')
+            self.enableScene('SelectCard')
+            self.enableScene('FightBox')
+            self.enableScene('SingleHand')
+            self.enableScene('PveFightIng')
+        elif mode=='modePvpSurrender':
+            self.enableScene('StoneStart')
+            self.enableScene('StoneInsure')
+            self.enableScene('ModeChoose')
+            self.enableScene('PointChoose')
+            self.enableScene('SelectCard')
+            self.enableScene('FightBox')
+            self.enableScene('SingleHand')
+            self.enableScene('PvpSurrender')
 
     def procScene(self):
         background=SaveScreen()
         for scene in self.allScene:
             if scene.isOwn(background):
                 scene.proc(background)
-                if scene.name=='PveFightChoose':
-                    self.disScene('StoneStart')
-                    self.disScene('StoneInsure')
-                    self.disScene('ModeChoose')
-                    self.disScene('PointChoose')
-                    self.disScene('PveSelectZone')
-                elif scene.name=='PveFightIng':
-                    self.disScene('PveFightChoose')
-                    self.disScene('PveFightQuit')
-                    self.disScene('PveSelectTreasury')
-                    self.disScene('PveSelectSurprise')
-                    self.disScene('FightBox')
-                    self.disScene('PveFightFinish')
-                    self.disScene('PveSelectLevel')
-                    self.disScene('SelectCard')
-                elif scene.name=='SingleHand':
-                    self.enableScene('PveFightChoose')
-                    self.enableScene('PveFightQuit')
-                    self.enableScene('PveSelectTreasury')
-                    self.enableScene('PveSelectSurprise')
-                    self.enableScene('FightBox')
-                    self.enableScene('PveFightFinish')
-                    self.enableScene('PveSelectLevel')
-                    self.enableScene('SelectCard')
+                if MyGui.gGameMode=='1':
+                    if scene.name=='PveFightChoose':
+                        self.disScene('StoneStart')
+                        self.disScene('StoneInsure')
+                        self.disScene('ModeChoose')
+                        self.disScene('PointChoose')
+                        self.disScene('PveSelectZone')
+                    elif scene.name=='PveFightIng':
+                        self.disScene('PveFightChoose')
+                        self.disScene('PveFightQuit')
+                        self.disScene('PveSelectTreasury')
+                        self.disScene('PveSelectSurprise')
+                        self.disScene('FightBox')
+                        self.disScene('PveFightFinish')
+                        self.disScene('PveSelectLevel')
+                        self.disScene('SelectCard')
+                    elif scene.name=='SingleHand':
+                        self.enableScene('PveFightChoose')
+                        self.enableScene('PveFightQuit')
+                        self.enableScene('PveSelectTreasury')
+                        self.enableScene('PveSelectSurprise')
+                        self.enableScene('FightBox')
+                        self.enableScene('PveFightFinish')
+                        self.enableScene('PveSelectLevel')
+                        self.enableScene('SelectCard')
                 break
 
     def run(self):
@@ -142,7 +154,11 @@ class AutoAi(object):
             time.sleep(0.1)
             if MyGui.bAutoAi:
                 if MyGui.bResetScene:
-                    #self.setMode('modePvpSurrender')
-                    self.setMode('modePve')
+                    if MyGui.gGameMode=='1':
+                        self.setMode('modePve')
+                    elif MyGui.gGameMode=='2':
+                        self.setMode('modePvpNormal')
+                    elif MyGui.gGameMode=='3':
+                        self.setMode('modePvpSurrender')
                     MyGui.bResetScene=False
                 self.procScene()

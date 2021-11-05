@@ -168,7 +168,7 @@ class MyGui(object):
         self.lb2=Label(self.win,text='游戏模式：',font=("",12))
         self.lb2.place(x=10,y=40)
         self.cmb1=ttk.Combobox(self.win,width=10,font=("",10))
-        self.cmb1['values']=['PVE','PVP']
+        self.cmb1['values']=['PVE副本坐牢','PVP正常对战','PVP友好互投']
         self.cmb1['state']='readonly'
         game=MyGui.gGameMode.replace('\n','')
         self.cmb1.current(int(game)-1)
@@ -282,13 +282,14 @@ class MyGui(object):
     
     def setGameMode(self):
         i=0
-        all=['PVE','PVP']
+        all=['PVE副本坐牢','PVP正常对战','PVP友好互投']
         name1=self.cmb1.get()
         for name in all:
             if name1!=name:i+=1
             else:
                 if i==0:MyGui.gGameMode='1'
                 elif i==1:MyGui.gGameMode='2'
+                elif i==2:MyGui.gGameMode='3'
                 break
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
