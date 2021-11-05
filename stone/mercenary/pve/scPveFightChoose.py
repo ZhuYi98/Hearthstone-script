@@ -3,6 +3,7 @@
 #时间：2021年10月22日
 
 import os
+from math import *
 from common import *
 from openCv import *
 
@@ -112,7 +113,6 @@ class scPveFightChoose(myScene):
 
         #寻找新关卡（mult匹配）
         allList=[]
-        funcList4={}
         for func in self.funcPng:
             if (func.name=='funcSurprise') or \
                 (func.name=='funcSkip1') or \
@@ -124,49 +124,72 @@ class scPveFightChoose(myScene):
                 (func.name=='funcHeroGreen') or \
                 (func.name=='funcHeroBoss'):
                 bFind,okList=bFindMultInBackground(background,func,0.80)
-                if bFind:funcList4[func.name]=okList
-        if 'funcSurprise' in funcList4:
-            posList=funcList4['funcSurprise']
-            for pos in posList:
-                allList.append(pos)
-        if 'funcSkip1' in funcList4:
-            posList=funcList4['funcSkip1']
-            for pos in posList:
-                allList.append(pos)
-        if 'funcSkip2' in funcList4:
-            posList=funcList4['funcSkip2']
-            for pos in posList:
-                allList.append(pos)
-        if 'funcSkip3' in funcList4:
-            posList=funcList4['funcSkip3']
-            for pos in posList:
-                allList.append(pos)
-        if 'funcSkip4' in funcList4:
-            posList=funcList4['funcSkip4']
-            for pos in posList:
-                allList.append(pos)
-        if 'funcHeroRed' in funcList4:
-            posList=funcList4['funcHeroRed']
-            for pos in posList:
-                pos[3]+=100
-                allList.append(pos)
-        if 'funcHeroBlue' in funcList4:
-            posList=funcList4['funcHeroBlue']
-            for pos in posList:
-                pos[3]+=100
-                allList.append(pos)
-        if 'funcHeroGreen' in funcList4:
-            posList=funcList4['funcHeroGreen']
-            for pos in posList:
-                pos[3]+=100
-                allList.append(pos)
-        if 'funcHeroBoss' in funcList4:
-            posList=funcList4['funcHeroBoss']
-            for pos in posList:
-                pos[3]+=100
-                allList.append(pos)
-        #分为三层，选择中间有效数据
+                if bFind:
+                    for pos in okList:
+                        if (func.name=='funcHeroRed') or \
+                            (func.name=='funcHeroBlue') or \
+                            (func.name=='funcHeroGreen') or \
+                            (func.name=='funcHeroBoss'):
+                                pos[3]+=100
+                        allList.append([pos[0],pos[1],pos[2],pos[3],func.name])
+
+        #获取有效
+        allList.sort(key=lambda x:(x[1],x[0]))
+        firstValid=allList[0]
+        y=allList[0][1]
+        newList=[]
         for pos in allList:
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
-            if self.bValidButton():
-                return
+            if not (abs(pos[1]-y)<50):
+                firstValid=pos
+                break
+        for pos in allList:
+            if (abs(pos[1]-firstValid[1])<50):
+                newList.append(pos)
+
+        #点击操作
+        for pos in newList:
+            if pos[4]=='funcSurprise':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcSkip1':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcSkip2':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcSkip3':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcSkip4':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcHeroRed':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcHeroBlue':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcHeroGreen':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList:
+            if pos[4]=='funcHeroBoss':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+
