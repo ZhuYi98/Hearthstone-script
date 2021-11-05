@@ -10,6 +10,7 @@ from openCv import *
 class scPveFightChoose(myScene):
     def __init__(self):
         self.bValid=False
+        self.taskPos=[0,0]
         self.name='PveFightChoose'
         self.path='resource/mercenary/pve/scPveFightChoose'
         self.tagPng=[myPng(self.path,png) for png in os.listdir(self.path) if png.startswith('tag')]
@@ -69,12 +70,44 @@ class scPveFightChoose(myScene):
     def proc(self,background):
 
         #N轮放弃
-        if MyGui.gRound>=MyGui.gAbandonCnt:
+        if MyGui.gRound>MyGui.gAbandonCnt:
             for func in self.funcPng:
                 if (func.name=='funcTeamView'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.90)
                     if bFind:
                         moveAndClick(x+w/2,y+h/2)
+                        break
+            return
+
+        #已经查看过营火
+        if MyGui.gRound==1:
+            for func in self.funcPng:
+                if (func.name=='funcFire'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                    if bFind:
+                        moveAndClick(self.taskPos[0],self.taskPos[1]-210)
+                        return
+
+        #查看是否完成任务
+        if MyGui.gRound==0:
+            #寻找营火
+            for func in self.funcPng:
+                if (func.name=='funcTask'):
+                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                    if bFind:
+                        self.taskPos[0]=x+w/2
+                        self.taskPos[1]=y+h/2-60
+                        moveAndClick(self.taskPos[0],self.taskPos[1])
+                        #寻找前往按钮
+                        background=SaveScreen()
+                        for func in self.funcPng:
+                            if (func.name=='funcStartGoto'):
+                                bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                                if bFind:
+                                    moveAndClick(x+w/2,y+h/2,2)
+                                    break
+                        break
+            MyGui.gRound+=1
             return
 
         #寻找开始按钮

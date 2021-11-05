@@ -23,6 +23,9 @@ def moveAndClick(x,y,t=1.5):
         pyautogui.moveTo(10,10)
         time.sleep(t)
 
+def Move(x,y):
+    pyautogui.moveTo(x,y)
+
 def Click(x,y,b='left',t=0):
     if x>=10 and x<=(w-10) and y>=10 and y<=(h-10):
         pyautogui.mouseDown(x,y,button=b)

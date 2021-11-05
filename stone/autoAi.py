@@ -18,6 +18,7 @@ from base.scModeChoose import *
 from mercenary.base.scPointChoose import *
 from mercenary.base.scSelectCard import *
 from mercenary.base.scFightBox import *
+from mercenary.base.scTaskFinish import *
 from mercenary.base.scSingleHand import *
 
 #佣兵PVE
@@ -51,6 +52,7 @@ class AutoAi(object):
         self.allScene.append(scPointChoose())
         self.allScene.append(scSelectCard())
         self.allScene.append(scFightBox())
+        self.allScene.append(scTaskFinish())
         self.allScene.append(scSingleHand())
 
         #佣兵PVE
@@ -95,6 +97,7 @@ class AutoAi(object):
             self.enableScene('PveSelectTreasury')
             self.enableScene('PveSelectSurprise')
             self.enableScene('FightBox')
+            self.enableScene('TaskFinish')
             self.enableScene('PveFightFinish')
             self.enableScene('SingleHand')
         elif mode=='modePvpNormal':
@@ -134,6 +137,7 @@ class AutoAi(object):
                         self.disScene('PveSelectTreasury')
                         self.disScene('PveSelectSurprise')
                         self.disScene('FightBox')
+                        self.disScene('TaskFinish')
                         self.disScene('PveFightFinish')
                         self.disScene('PveSelectLevel')
                         self.disScene('SelectCard')
@@ -143,6 +147,7 @@ class AutoAi(object):
                         self.enableScene('PveSelectTreasury')
                         self.enableScene('PveSelectSurprise')
                         self.enableScene('FightBox')
+                        self.enableScene('TaskFinish')
                         self.enableScene('PveFightFinish')
                         self.enableScene('PveSelectLevel')
                         self.enableScene('SelectCard')
