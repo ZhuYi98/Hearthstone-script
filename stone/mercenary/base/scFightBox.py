@@ -3,6 +3,7 @@
 #时间：2021年10月22日
 
 import os
+from math import *
 from common import *
 from openCv import *
 
@@ -78,5 +79,10 @@ class scFightBox(myScene):
             posList=funcList['funcBox5']
             for pos in posList:
                 allList.append(pos)
+        allList.sort()
+        curr=allList[0]
+        moveAndClick(curr[0]-curr[2]/2,curr[1]-curr[3]/2,0)
         for pos in allList:
-            moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,0)
+            if not ((abs(pos[0]-curr[0])<10)and(abs(pos[1]-curr[1])<10)):
+                curr=pos
+                moveAndClick(curr[0]-curr[2]/2,curr[1]-curr[3]/2,0)
