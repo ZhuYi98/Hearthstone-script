@@ -19,7 +19,7 @@ class scTaskFinish(myScene):
         if self.bValid:
             tagList={}
             for tag in self.tagPng:
-                bFind,x,y,w,h=bFindInBackground(background,tag,0.80)
+                bFind,x,y,w,h=bFindInBackground(background,tag,0.90)
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
             if ('tagFire' in tagList):
