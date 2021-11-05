@@ -29,7 +29,8 @@ class scFightBox(myScene):
                ('tagBox4' in tagList) or \
                ('tagBox5' in tagList) or \
                ('tagPass1' in tagList) or \
-               ('tagPass2' in tagList):
+               ('tagPass2' in tagList) or \
+               ('tagPass3' in tagList):
                 return True
             else:
                 return False
@@ -41,7 +42,8 @@ class scFightBox(myScene):
         #开完宝箱
         for func in self.funcPng:
             if (func.name=='funcPass1') or \
-               (func.name=='funcPass2'):
+               (func.name=='funcPass2') or \
+               (func.name=='funcPass3'):
                 bFind,x,y,w,h=bFindInBackground(background,func,0.70)
                 if bFind:
                     SaveAwardPng()
