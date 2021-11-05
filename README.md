@@ -5,7 +5,7 @@
 
 待修改bug和优化功能：
 1. 副本选择：难度-简单和英雄；副本2-3等；通关、N小关放弃、神秘人放弃
-2. 技能释放：技能1、2、3优先；AOE禁用，技能随机；优先AOE,技能随机
+2. 每局开始时，查看是否有完成的任务，有的话，领取完毕再开始
 3. 
 4. 考虑使用pyinstaller生成exe方便使用
 
@@ -40,15 +40,19 @@
 
 #### 安装教程
 
+运行cmd，依次输入以下内容：
 0. pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 1. pip install opencv-python
 2. pip install pillow
 3. pip install pyautogui
-4. pip install win32gui （Python3.10等高级版本不需要安装，已经内置） 
+4. pip install pywin32
+5. pip install win32gui （Python3.10等高级版本不需要安装，已经内置） 
+
+备注：Python3.10等高级版本安装5失败后，就安装4
 
 #### 使用说明
 
-1. 环境安装完成后，直接运行stoneMain.py即可
+1. 环境安装完成后，直接双击运行stoneMain.py即可
 2. 可以根据自己的需求调试相关功能，打开对应开关即可
 
 #### 参与贡献
