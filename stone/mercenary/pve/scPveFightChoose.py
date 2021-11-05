@@ -165,6 +165,7 @@ class scPveFightChoose(myScene):
             for pos in posList:
                 pos[3]+=100
                 allList.append(pos)
+        #分为三层，选择中间有效数据
         for pos in allList:
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
             if self.bValidButton():
