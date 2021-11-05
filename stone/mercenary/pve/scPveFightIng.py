@@ -10,7 +10,8 @@ class scPveFightIng(myScene):
     def __init__(self):
         self.bValid=False
         self.enemyPos=[0,0]
-        self.offset=[-480,-320]
+        self.offset1=[-480,-320]
+        self.offset2=[-30,-190]
         self.bLastSkill=False
         self.lastSkill=None
         self.endPos=[0,0]
@@ -27,8 +28,10 @@ class scPveFightIng(myScene):
                 if bFind:
                     tagList[tag.name]=(x,y,w,h)
             if ('tagSkull' in tagList):
-                self.enemyPos[0]=x+self.offset[0]
-                self.enemyPos[1]=y+self.offset[1]
+                self.enemyPos[0]=x+self.offset1[0]
+                self.enemyPos[1]=y+self.offset1[1]
+                self.endPos[0]=x+self.offset2[0]
+                self.endPos[1]=y+self.offset2[1]
                 return True
             else:
                 return False
@@ -67,8 +70,6 @@ class scPveFightIng(myScene):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.80)
                     if bFind:
                         self.bLastSkill=False
-                        self.endPos[0]=x+w/2
-                        self.endPos[1]=y+h/2
                         moveAndClick(x+w/2,y+h/2,10) #战斗至少需要10秒
                         return
 

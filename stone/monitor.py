@@ -93,7 +93,7 @@ class Monitor(object):
                         '-'+MyGui.gEndTime.replace('\n','')+')'
             else:
                 MyGui.bAutoAi=False
-                MyGui.gLog='软件暂未运行，请点击蓝色"运行"按钮'
+                MyGui.gLog='软件暂未运行，请点击蓝色"运行"按钮后最小化软件'
 
 def threadMonitor():
     monitor=Monitor()
