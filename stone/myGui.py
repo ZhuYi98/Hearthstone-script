@@ -132,6 +132,7 @@ class MyGui(object):
     gDifficulty='1'
     gLevel='2-5'
     gAbandon=99
+    gViewTask=0
     gSkill='1'
     gCard='1-1'
     gInterval=600
@@ -148,6 +149,7 @@ class MyGui(object):
         MyGui.gDifficulty=config.get('config','difficulty')
         MyGui.gLevel=config.get('config','level')
         MyGui.gAbandon=int(config.get('config','abandon'))
+        MyGui.gViewTask=int(config.get('config','task'))
         MyGui.gSkill=config.get('config','skill')
         MyGui.gCard=config.get('config','card')
         MyGui.gInterval=int(config.get('config','interval'))
@@ -207,6 +209,12 @@ class MyGui(object):
         elif MyGui.gAbandon<=6 and MyGui.gAbandon>=1:
             self.cmb23.current(MyGui.gAbandon+1)
         self.cmb23.place(x=120,y=100)
+        self.checkVar=StringVar(value='0')
+        self.check=Checkbutton(self.win,text="自动点击任务",\
+            variable=self.checkVar,width=12,font=("",10))
+        if MyGui.gViewTask==1:
+            self.check.select()
+        self.check.place(x=5,y=100)
         self.btn666=Button(self.win,text='确定',width=5,height=2,\
             font=("",12),command=self.setZone)
         self.btn666.place(x=250,y=73)
@@ -297,6 +305,7 @@ class MyGui(object):
             self.cmb23.config(state=DISABLED)
             self.cmb3.config(state=DISABLED)
             self.cmb4.config(state=DISABLED)
+            self.check.config(state=DISABLED)
             self.text2.config(state=DISABLED)
             self.text3.config(state=DISABLED)
             self.text4.config(state=DISABLED)
@@ -311,6 +320,7 @@ class MyGui(object):
             self.cmb23.config(state=NORMAL)
             self.cmb3.config(state=NORMAL)
             self.cmb4.config(state=NORMAL)
+            self.check.config(state=NORMAL)
             self.text2.config(state=NORMAL)
             self.text3.config(state=NORMAL)
             self.text4.config(state=NORMAL)
@@ -379,6 +389,9 @@ class MyGui(object):
                 else:MyGui.gAbandon=i-1
                 break
         config.set("config","abandon",str(MyGui.gAbandon).replace('\n',''))
+
+        #点击任务
+        config.set("config","task",self.checkVar.get().replace('\n',''))
 
         #保存
         o=open("config/config.ini","w",encoding="utf8")

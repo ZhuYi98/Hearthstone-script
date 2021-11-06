@@ -79,36 +79,41 @@ class scPveFightChoose(myScene):
                         break
             return
 
-        #已经查看过营火
-        if MyGui.gRound==1:
-            for func in self.funcPng:
-                if (func.name=='funcFire'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-                    if bFind:
-                        moveAndClick(self.taskPos[0],self.taskPos[1]-210)
-                        return
+        if MyGui.gViewTask==1:
 
-        #查看是否完成任务
-        if MyGui.gRound==0:
-            #寻找营火
-            for func in self.funcPng:
-                if (func.name=='funcTask'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-                    if bFind:
-                        self.taskPos[0]=x+w/2
-                        self.taskPos[1]=y+h/2-60
-                        moveAndClick(self.taskPos[0],self.taskPos[1])
-                        #寻找前往按钮
-                        background=SaveScreen()
-                        for func in self.funcPng:
-                            if (func.name=='funcStartGoto'):
-                                bFind,x,y,w,h=bFindInBackground(background,func,0.80)
-                                if bFind:
-                                    moveAndClick(x+w/2,y+h/2,2)
-                                    break
-                        break
-            MyGui.gRound+=1
-            return
+            #已经查看过营火
+            if MyGui.gRound==1:
+                for func in self.funcPng:
+                    if (func.name=='funcFire'):
+                        bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                        if bFind:
+                            moveAndClick(self.taskPos[0],self.taskPos[1]-210)
+                            return
+
+            #查看是否完成任务
+            if MyGui.gRound==0:
+                #寻找营火
+                for func in self.funcPng:
+                    if (func.name=='funcTask'):
+                        bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                        if bFind:
+                            self.taskPos[0]=x+w/2
+                            self.taskPos[1]=y+h/2-60
+                            moveAndClick(self.taskPos[0],self.taskPos[1])
+                            #寻找前往按钮
+                            background=SaveScreen()
+                            for func in self.funcPng:
+                                if (func.name=='funcStartGoto'):
+                                    bFind,x,y,w,h=bFindInBackground(background,func,0.80)
+                                    if bFind:
+                                        moveAndClick(x+w/2,y+h/2,2)
+                                        break
+                            break
+                MyGui.gRound+=1
+                return
+        else:
+            if MyGui.gRound==0:
+                MyGui.gRound+=1
 
         #寻找开始按钮
         funcList2={}
