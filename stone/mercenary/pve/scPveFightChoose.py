@@ -226,3 +226,54 @@ class scPveFightChoose(myScene):
                 if self.bValidButton():
                     return
 
+        #异常情况
+        newList1=[]
+        for pos in allList:
+            if not (abs(pos[1]-firstValid[1])<50):
+                newList1.append(pos)
+        for pos in newList1:
+            if pos[4]=='funcSurprise':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,1)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcSkip1':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcSkip2':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcSkip3':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcSkip4':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcHeroRed':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcHeroBlue':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcHeroGreen':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+        for pos in newList1:
+            if pos[4]=='funcHeroBoss':
+                moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,2)
+                if self.bValidButton():
+                    return
+
