@@ -68,6 +68,7 @@ class scSingleHand(myScene):
                     moveAndClick(x+w/2,y+h/2+100,5)
                     break
                 elif func.name=='funcGetEquip':
+                    SaveAwardPng()
                     moveAndClick(x+w/2,y+h/2)
                     break
                 elif func.name=='funcLevel':
