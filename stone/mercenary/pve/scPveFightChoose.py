@@ -70,7 +70,7 @@ class scPveFightChoose(myScene):
     def proc(self,background):
 
         #N轮放弃
-        if MyGui.gRound>MyGui.gAbandonCnt:
+        if MyGui.gRound>MyGui.gAbandon:
             for func in self.funcPng:
                 if (func.name=='funcTeamView'):
                     bFind,x,y,w,h=bFindInBackground(background,func,0.90)
