@@ -144,17 +144,17 @@ class MyGui(object):
         #读取配置文件
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
-        MyGui.gBattlePath=config.get('config','battlepath')
-        MyGui.gGameMode=config.get('config','gamemode')
-        MyGui.gDifficulty=config.get('config','difficulty')
-        MyGui.gLevel=config.get('config','level')
-        MyGui.gAbandon=int(config.get('config','abandon'))
-        MyGui.gViewTask=int(config.get('config','task'))
-        MyGui.gSkill=config.get('config','skill')
-        MyGui.gCard=config.get('config','card')
-        MyGui.gInterval=int(config.get('config','interval'))
-        MyGui.gStartTime=config.get('config','starttime')
-        MyGui.gEndTime=config.get('config','endtime')
+        MyGui.gBattlePath=config.get('config','battlepath').replace('\n','')
+        MyGui.gGameMode=config.get('config','gamemode').replace('\n','')
+        MyGui.gDifficulty=config.get('config','difficulty').replace('\n','')
+        MyGui.gLevel=config.get('config','level').replace('\n','')
+        MyGui.gAbandon=int(config.get('config','abandon').replace('\n',''))
+        MyGui.gViewTask=int(config.get('config','task').replace('\n',''))
+        MyGui.gSkill=config.get('config','skill').replace('\n','')
+        MyGui.gCard=config.get('config','card').replace('\n','')
+        MyGui.gInterval=int(config.get('config','interval').replace('\n',''))
+        MyGui.gStartTime=config.get('config','starttime').replace('\n','')
+        MyGui.gEndTime=config.get('config','endtime').replace('\n','')
 
         self.win=Tk()
         self.win.title('炉石AI--By琴弦上的宇宙--2021-11-06') #标题
@@ -326,7 +326,7 @@ class MyGui(object):
             self.text4.config(state=NORMAL)
 
     def setBattle(self):
-        file=filedialog.askopenfilename()
+        file=filedialog.askopenfilename().replace('\n','')
         MyGui.gBattlePath=file
         self.text1.delete(0.0,END)
         self.text1.insert(INSERT,file)
@@ -336,11 +336,11 @@ class MyGui(object):
         o=open("config/config.ini","w",encoding="utf8")
         config.write(o)
         o.close()
-    
+
     def setGameMode(self):
         i=0
         all=['PVE副本坐牢','PVP正常对战','PVP友好互投']
-        name1=self.cmb1.get()
+        name1=self.cmb1.get().replace('\n','')
         for name in all:
             if name1!=name:i+=1
             else:
@@ -362,7 +362,7 @@ class MyGui(object):
         #副本难度
         i=0
         all=['普通','英雄']
-        name1=self.cmb21.get()
+        name1=self.cmb21.get().replace('\n','')
         for name in all:
             if name1!=name:i+=1
             else:
@@ -380,7 +380,7 @@ class MyGui(object):
         all=['全力通关','神秘人后放弃',\
             '1小关后放弃','2小关后放弃','3小关后放弃',
             '4小关后放弃','5小关后放弃','6小关后放弃']
-        name1=self.cmb23.get()
+        name1=self.cmb23.get().replace('\n','')
         for name in all:
             if name1!=name:i+=1
             else:
@@ -391,6 +391,7 @@ class MyGui(object):
         config.set("config","abandon",str(MyGui.gAbandon).replace('\n',''))
 
         #点击任务
+        MyGui.gViewTask=int(self.checkVar.get().replace('\n',''))
         config.set("config","task",self.checkVar.get().replace('\n',''))
 
         #保存
@@ -402,7 +403,7 @@ class MyGui(object):
         i=0
         all=['AOE后优先1','AOE后优先2','AOE后优先3','AOE后优先4','AOE后优先5','AOE后随机',\
              '必优先1技能','必优先2技能','必优先3技能','必优先4技能','必优先5技能','全技能随机']
-        name1=self.cmb3.get()
+        name1=self.cmb3.get().replace('\n','')
         for name in all:
             if name1!=name:i+=1
             else:
@@ -431,7 +432,7 @@ class MyGui(object):
         all=['第1行第1个','第1行第2个','第1行第3个',\
              '第2行第1个','第2行第2个','第2行第3个',\
              '第3行第1个','第3行第2个','第3行第3个']
-        name1=self.cmb4.get()
+        name1=self.cmb4.get().replace('\n','')
         for name in all:
             if name1!=name:i+=1
             else:
@@ -453,7 +454,7 @@ class MyGui(object):
         o.close()
 
     def setInterval(self):
-        MyGui.gInterval=int(self.text2.get(0.0,END))
+        MyGui.gInterval=int(self.text2.get(0.0,END).replace('\n',''))
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         config.set("config","interval",self.text2.get(0.0,END).replace('\n',''))
@@ -462,8 +463,8 @@ class MyGui(object):
         o.close()
 
     def setRunTime(self):
-        MyGui.gStartTime=self.text3.get(0.0,END)
-        MyGui.gEndTime=self.text4.get(0.0,END)
+        MyGui.gStartTime=self.text3.get(0.0,END).replace('\n','')
+        MyGui.gEndTime=self.text4.get(0.0,END).replace('\n','')
         config=configparser.ConfigParser()
         config.read("config/config.ini",encoding="utf8")
         config.set("config","starttime",MyGui.gStartTime.replace('\n',''))
