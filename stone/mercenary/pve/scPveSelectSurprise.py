@@ -40,6 +40,7 @@ class scPveSelectSurprise(myScene):
         if 'funcSel' in funcList and 'funcStart' in funcList:
             pos=funcList['funcStart']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2)
+            MyGui.gRound=99
             return
 
         #指定英雄碎片

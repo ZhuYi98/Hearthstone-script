@@ -41,7 +41,7 @@
 
 #### 安装教程
 
-运行cmd，依次输入以下内容：
+安装Python后（尽量最新版本3.10），运行cmd，依次输入以下内容：
 
 0. pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 1. pip install opencv-python
