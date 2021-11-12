@@ -6,6 +6,8 @@ import os
 import time
 import datetime
 import win32com.client
+import pythoncom
+
 from common import *
 from myGui import *
 
@@ -96,5 +98,7 @@ class Monitor(object):
                 MyGui.gLog='软件暂未运行，请点击蓝色"运行"按钮后最小化软件'
 
 def threadMonitor():
+    pythoncom.CoInitialize()
     monitor=Monitor()
     monitor.run()
+    pythoncom.CoUninitialize()
