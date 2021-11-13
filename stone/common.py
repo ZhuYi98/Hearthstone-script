@@ -8,6 +8,8 @@ import pyautogui
 import time
 import random
 import numpy as np
+import win32gui
+
 from myGui import *
 
 w,h=pyautogui.size()
@@ -62,7 +64,12 @@ def SaveLastSkillPng(x,y,w,h):
     return myPng('resource','lastSkill.png')
 
 def SaveScreen():
-    pyautogui.screenshot("resource/background.png")
+    handle = win32gui.FindWindow("UnityWndClass", "炉石传说")
+    if handle > 0:
+        left, top, right, bottom = win32gui.GetWindowRect(handle)
+        pyautogui.screenshot("resource/background.png", region=(left, top, right - left, bottom - top))
+    else:
+        pyautogui.screenshot("resource/background.png")
     return cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
 
 def SaveAwardPng():

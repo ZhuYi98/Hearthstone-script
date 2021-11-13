@@ -41,8 +41,14 @@ def bFindInBackground(background,tempPng,threshold=0.80):
     result=cv2.matchTemplate(background,tempPng.data,cv2.TM_CCOEFF_NORMED)
     minVal,maxVal,minLoc,maxLoc=cv2.minMaxLoc(result)
     if maxVal>threshold:
-        x=maxLoc[0]
-        y=maxLoc[1]
+        handle = win32gui.FindWindow("UnityWndClass", "炉石传说")
+        if handle > 0:
+            left, top, right, bottom = win32gui.GetWindowRect(handle)
+            x = maxLoc[0] + left
+            y = maxLoc[1] + top
+        else:
+            x = maxLoc[0]
+            y = maxLoc[1]
         if gDebug:
             MyGui.gLog=tempPng.path+' S='+str(round(maxVal,2))
             print(MyGui.gLog)
@@ -90,8 +96,14 @@ def bFindMultInBackground(background,tempPng,threshold=0.80):
     i=0
     okList=[]
     for pt in dets:
-        x=int(pt[0])
-        y=int(pt[1])
+        handle = win32gui.FindWindow("UnityWndClass", "炉石传说")
+        if handle > 0:
+            left, top, right, bottom = win32gui.GetWindowRect(handle)
+            x = int(pt[0]) + left
+            y = int(pt[1]) + top
+        else:
+            x = int(pt[0])
+            y = int(pt[1])
         okList.append([x,y,w,h])
         i+=1
     
