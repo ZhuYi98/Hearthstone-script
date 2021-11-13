@@ -20,7 +20,7 @@ if __name__=='__main__':
     def main():
 
         #日志
-        #sys.stdout=MyLog()
+        #sys.stdout=MyLog()1
 
         #菜单
         myGui=MyGui()
