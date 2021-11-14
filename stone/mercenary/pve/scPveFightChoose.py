@@ -69,16 +69,6 @@ class scPveFightChoose(myScene):
 
     def proc(self,background):
 
-        #N轮放弃
-        if MyGui.gRound>MyGui.gAbandon:
-            for func in self.funcPng:
-                if (func.name=='funcTeamView'):
-                    bFind,x,y,w,h=bFindInBackground(background,func,0.90)
-                    if bFind:
-                        moveAndClick(x+w/2,y+h/2)
-                        break
-            return
-
         if MyGui.gViewTask==1:
 
             #已经查看过营火
@@ -128,6 +118,17 @@ class scPveFightChoose(myScene):
                     funcList2[func.name]=(x,y,w,h)
                     break
         if 'funcStartInter' in funcList2:
+            #N轮放弃
+            if MyGui.gRound>MyGui.gAbandon:
+                for func in self.funcPng:
+                    if (func.name=='funcTeamView'):
+                        bFind,x,y,w,h=bFindInBackground(background,func,0.90)
+                        if bFind:
+                            moveAndClick(x+w/2,y+h/2)
+                            break
+                return
+
+            #正常进行
             pos=funcList2['funcStartInter']
             moveAndClick(pos[0]+pos[2]/2,pos[1]+pos[3]/2,10)
             MyGui.gRunTime=time.time()
