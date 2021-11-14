@@ -157,7 +157,7 @@ class MyGui(object):
         MyGui.gEndTime=config.get('config','endtime').replace('\n','')
 
         self.win=Tk()
-        self.win.title('炉石AI--By琴弦上的宇宙--2021-11-06') #标题
+        self.win.title('炉石AI--By琴弦上的宇宙--2021-11-14') #标题
         self.win.attributes('-alpha',1.0) #透明度
         self.win.attributes('-topmost',True) #置顶
         self.win.geometry("420x340+0+345") #大小和位置

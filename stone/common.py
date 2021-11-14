@@ -64,10 +64,10 @@ def SaveLastSkillPng(x,y,w,h):
     return myPng('resource','lastSkill.png')
 
 def SaveScreen():
-    handle = win32gui.FindWindow("UnityWndClass", "炉石传说")
-    if handle > 0:
-        left, top, right, bottom = win32gui.GetWindowRect(handle)
-        pyautogui.screenshot("resource/background.png", region=(left, top, right - left, bottom - top))
+    handle=win32gui.FindWindow("UnityWndClass","炉石传说")
+    if handle>0:
+        left,top,right,bottom=win32gui.GetWindowRect(handle)
+        pyautogui.screenshot("resource/background.png",region=(left,top,right-left,bottom-top))
     else:
         pyautogui.screenshot("resource/background.png")
     return cv2.imread("resource/background.png",cv2.IMREAD_GRAYSCALE)
